@@ -1,0 +1,16 @@
+.container {
+	margin-top: 30%;
+}
+
+#registerForm{
+	display: none;
+}
+
+#registerDetail{
+	display: none;
+}
+
+.required:after {
+	content: "*";
+	color: red;
+}
