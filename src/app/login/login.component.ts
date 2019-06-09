@@ -1,6 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
 import { Router } from  '@angular/router';
-import { User } from  '../user';
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';

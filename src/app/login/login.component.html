@@ -1,39 +1,41 @@
-<div class="container">  
-  <h1>Welcome to ChitChat!</h1>
-  <form id="loginForm">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" required>
-    </div>
-    <div class="form-group" align="center">
-      <button type="submit" class="btn btn-primary" align="center">Login</button>
-    </div>
-  </form>
-  <div align="center" id="loginDetail">
-    <a href="#" (click)="toggleForm(true)"><small>Not a member? Join today!</small></a>
-  </div>
-  <form id="registerForm" ng-submit="registerUser">
-    <div class="form-group">
-      <label for="newPhone" class="required">Phone</label>
-      <input type="Phone" class="form-control" id="newPhone" required>
-    </div>
-    <div class="form-group">
-      <label for="newUsername" class="required">Username</label>
-      <input type="text" class="form-control" id="newUsername" required>
-    </div>
-    <div class="form-group">
-      <label for="newPassword" class="required">Password</label>
-      <input type="password" class="form-control" id="newPassword" required>
-    </div>
-    <div class="form-group" align="center">
-      <button type="submit" class="btn btn-primary" align="center">Join Now</button>
-    </div>
-  </form>
-  <div align="center" id="registerDetail">
-    <a href="#" (click)="toggleForm(false)"><small>Already a member? Login now!</small></a>
-  </div>
-</div>
+<section class="row justify-content-center login-frame">
+    <section class="col-l1 mx-auto">
+      <h1>Welcome to ChitChat!</h1>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" required>
+        </div>
+        <div class="form-group" align="center">
+          <button type="submit" class="btn btn-primary" align="center">Login</button>
+        </div>
+      </form>
+      <div align="center" id="loginDetail">
+        <a href="#" (click)="toggleForm(true)"><small>Not a member? Join today!</small></a>
+      </div>
+      <form id="registerForm" ng-submit="registerUser">
+        <div class="form-group">
+          <label for="newPhone" class="required">Phone</label>
+          <input type="Phone" class="form-control" id="newPhone" required>
+        </div>
+        <div class="form-group">
+          <label for="newUsername" class="required">Username</label>
+          <input type="text" class="form-control" id="newUsername" required>
+        </div>
+        <div class="form-group">
+          <label for="newPassword" class="required">Password</label>
+          <input type="password" class="form-control" id="newPassword" required>
+        </div>
+        <div class="form-group" align="center">
+          <button type="submit" class="btn btn-primary" align="center">Join Now</button>
+        </div>
+      </form>
+      <div align="center" id="registerDetail">
+        <a href="#" (click)="toggleForm(false)"><small>Already a member? Login now!</small></a>
+      </div>
+  </section>
+</section>

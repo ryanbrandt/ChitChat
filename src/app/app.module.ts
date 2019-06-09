@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { LoginComponent } from './login/login.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { LoginComponent } from './login/login.component';
   declarations: [
   	AppComponent,
   	TopBarComponent, 
-	LoginComponent	
+	  LoginComponent,
+	  InboxComponent	
   ],
   providers: [],
   bootstrap: [AppComponent]
