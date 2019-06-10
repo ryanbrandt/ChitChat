@@ -8,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 
 export class InboxComponent implements OnInit {
 
+	
+	
 	toggleActive() {  
-	    jQuery('.nav-link').removeClass('active');
+	    $('.nav-link').removeClass('active');
 	    $(event.target).addClass('active');
 	    // TODO: unloading of data related to tab
  	}
+ 	ngOnInit(){ }
 }

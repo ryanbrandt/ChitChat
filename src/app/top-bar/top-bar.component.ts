@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-top-bar',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class TopBarComponent implements OnInit {
-
+	
+	ngOnInit(){ }
 
 
 }

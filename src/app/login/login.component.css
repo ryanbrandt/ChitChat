@@ -2,15 +2,6 @@
 	margin-top: 20vh;
 }
 
-#registerForm{
+#loginForm {
 	display: none;
-}
-
-#registerDetail{
-	display: none;
-}
-
-.required:after {
-	content: "*";
-	color: red;
 }

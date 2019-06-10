@@ -1,0 +1,10 @@
+.register-frame {
+	margin-top: 20vh;
+}
+#registerForm {
+	display: none;
+}
+.required:after {
+	content: "*";
+	color: red;
+}

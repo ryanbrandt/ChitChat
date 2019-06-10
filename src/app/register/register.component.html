@@ -1,0 +1,26 @@
+<section class="row justify-content-center register-frame">
+    <section class="col-l1 mx-auto">
+    	<h1>Join ChitChat!</h1>
+		<form id="registerForm" ng-submit="registerUser">
+		    <div class="form-group">
+		        <label for="newPhone" class="required">Phone</label>
+		        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" name="phone" required>
+		        <small class="form-text text-muted">Format: XXX-XXX-XXXX</small>
+		     </div>
+		     <div class="form-group">
+		        <label for="newUsername" class="required">Username</label>
+		        <input type="text" class="form-control" name="username" required>
+		     </div>
+		     <div class="form-group">
+		        <label for="newPassword" class="required">Password</label>
+		        <input type="password" class="form-control" name="password" required>
+		     </div>
+		     <div class="form-group" align="center">
+		        <button type="submit" class="btn btn-primary" align="center">Join Now</button>
+		     </div>
+		</form>
+		<div align="center" id="registerDetail">
+		    <a href="#" routerLink=""><small>Already a member? Login now!</small></a>
+		</div>
+	</section>
+</section>

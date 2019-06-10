@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { LoginComponent } from './login/login.component';
 import { InboxComponent } from './inbox/inbox.component';
+import { RegisterComponent } from './register/register.component';
+import { DataService } from './data-service/data-service.component';
+import { AlertService } from './alert-service/alert-service.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   imports: [
@@ -17,9 +21,14 @@ import { InboxComponent } from './inbox/inbox.component';
   	AppComponent,
   	TopBarComponent, 
 	  LoginComponent,
-	  InboxComponent	
+    RegisterComponent,
+	  InboxComponent, 
+    AlertComponent
   ],
-  providers: [],
+  providers: [
+    DataService,
+    AlertService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
