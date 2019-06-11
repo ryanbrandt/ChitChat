@@ -7,8 +7,8 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { LoginComponent } from './login/login.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { RegisterComponent } from './register/register.component';
-import { DataService } from './data-service/data-service.component';
-import { AlertService } from './alert-service/alert-service.component';
+import { DataService } from './services/data-service/data-service.service';
+import { AlertService } from './services/alert-service/alert-service.service';
 import { AlertComponent } from './alert/alert.component';
 
 @NgModule({

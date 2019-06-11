@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-@Injectable()
+/* global data retrieval service to make API calls */
+@Injectable({
+	providedIn: 'root',
+})
 export class DataService {
-	url: string;
-	payload: object;
-	responseStatus: number;
-	response: object;
+	url = '';
+	payload = {};
+	responseStatus = -1;
+	response = {};
 
-  	constructor(private http: HttpClient, url: string) { 
-  		this.url = url;
-  		// endpoint related to component using
-  	}
+  	constructor(private http: HttpClient) { }
 
   	/* generic get */
 	getData() {

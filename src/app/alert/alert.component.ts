@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../alert-service/alert-service.component';
+import { AlertService } from '../services/alert-service/alert-service.service';
 import { Alert, AlertType } from './models';
 
 @Component({
@@ -42,4 +42,5 @@ export class AlertComponent {
 				return 'alert alert-danger';
 		}
 	}
+
 }
