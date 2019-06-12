@@ -8,17 +8,34 @@ import { AlertService } from '../services/alert-service/alert-service.service';
 })
 
 export class InboxComponent implements OnInit {
+	Object = Object;
+	// not elegent, but pass Object to template to iterate over API response
 
-	constructor(private dataService: DataService, private alertService: AlertService){ }
+	constructor(private dataService: DataService, private alertService: AlertService){ 
+		this.dataService.url = 'http://localhost:8000/message/';
+	}
 
-	ngOnInit(){ 
- 		// fetch data for direct messages, all other data (group messages, contacts, fetched on click)
+	async ngOnInit(){ 
+		this.loader = document.getElementById('loader');
+ 		await this.dataService.getData();
+ 		this.loader.style.display = "none";
+ 		this.isLoaded = true;
  	}
 	
-	toggleActive() {  
+	async toggleActive() {  
 	    $('.nav-link').removeClass('active');
 	    $(event.target).addClass('active');
-	    // TODO: unloading of data related to tab
+	    this.loader.style.display = "block";
+	    // this.dataService.url = 'my endpoint for the button clicked';
+	    // await this.dataService.getData();
+	    this.loader.style.display = "none";
+ 	}
+
+ 	isEmpty(){
+ 		if(typeof(this.dataService.response) == 'undefined' || this.dataService.response.length == 0){
+ 			return true;
+ 		}
+ 		return false;
  	}
 
 }

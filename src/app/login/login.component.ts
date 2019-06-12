@@ -11,12 +11,15 @@ import * as $ from 'jquery';
 
 export class LoginComponent implements OnInit{
 	
-	constructor(private dataService: DataService, private alertService: AlertService, private router: Router){ }
+	constructor(private dataService: DataService, private alertService: AlertService, private router: Router){ 
+		this.dataService.url = 'http://localhost:8000/user/';
+	}
 
 	/* validate user on submit */
 	@HostListener('submit', ['$event']) async onSubmit(){
 		this.alertService.clear();
 		var form = event.target;
+		// something something token authentication
 
 	}
 
