@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener} from '@angular/core';
 import { DataService } from '../services/data-service/data-service.service';
 import { AlertService } from '../services/alert-service/alert-service.service';
 
@@ -10,6 +10,8 @@ import { AlertService } from '../services/alert-service/alert-service.service';
 export class InboxComponent implements OnInit {
 	Object = Object;
 	// not elegent, but pass Object to template to iterate over API response
+	loader;
+	isLoaded = false;
 
 	constructor(private dataService: DataService, private alertService: AlertService){ 
 		this.dataService.url = 'http://localhost:8000/message/';
@@ -23,19 +25,18 @@ export class InboxComponent implements OnInit {
  	}
 	
 	async toggleActive() {  
-	    $('.nav-link').removeClass('active');
+	    $('.tab').removeClass('active');
 	    $(event.target).addClass('active');
+	    this.isLoaded = false;
 	    this.loader.style.display = "block";
-	    // this.dataService.url = 'my endpoint for the button clicked';
-	    // await this.dataService.getData();
+	    // this.dataService.url = 'my endpoint for the button clicked, still to create :P';
+	    await this.dataService.getData();
 	    this.loader.style.display = "none";
+	    this.isLoaded = true;
  	}
 
  	isEmpty(){
- 		if(typeof(this.dataService.response) == 'undefined' || this.dataService.response.length == 0){
- 			return true;
- 		}
- 		return false;
+ 		return !this.dataService.response || Object.keys(this.dataService.response).length == 0;
  	}
 
 }

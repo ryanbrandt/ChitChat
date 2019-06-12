@@ -2,13 +2,13 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a class="nav-link active" (click)="toggleActive()">Inbox</a>
+        <a class="nav-link tab active" (click)="toggleActive()">Inbox</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="toggleActive()">Groups</a>
+        <a class="nav-link tab" (click)="toggleActive()">Groups</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="toggleActive()">Contacts</a>
+        <a class="nav-link tab" (click)="toggleActive()">Contacts</a>
       </li>
     </ul>
   </div>
@@ -19,8 +19,8 @@
       </div>
     </div>
   </div>
+<!-- Generates Bootstrap cards per Message Thread/Contacts -->
 <div class="inbox-data" *ngFor="let key of Object.keys(dataService.response)">
-  <hr>
   <div class="card-body">
     <h5 class="card-title">{{ dataService.response[key].message.author }}</h5>
     <p class="card-text">{{ dataService.response[key].message.content }}</p>
@@ -28,8 +28,11 @@
   </div>
   <hr>
 </div>
+<!-- Display if No Messages/Contacts -->
 <div *ngIf="isLoaded">
   <div *ngIf="isEmpty()">
-    <p style="font-style: italic;">No messages... </p>
+    <p>
+      <small>Theres nothing here...</small>
+    </p>
   </div>
 </div>
