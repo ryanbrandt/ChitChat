@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
-import { Alert, AlertType } from '../../alert/models';
-import { AlertComponent } from '../../alert/alert.component';
+import { Alert, AlertType } from '../models/models';
+import { AlertComponent } from '../components/alert.component';
 import { Subject } from 'rxjs';
 
 /* global alert manager */

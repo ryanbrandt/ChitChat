@@ -1,12 +1,12 @@
-import { DataService } from '../services/data-service/data-service.service';
-import { AlertService } from '../services/alert-service/alert-service.service';
 import { Router } from  '@angular/router';
 import { Component, HostListener, OnInit } from '@angular/core';
+import { DataService } from '../../../global/services/data-service.service';
+import { AlertService } from '../../../global/services/alert-service.service';
 import * as $ from 'jquery';
 
 @Component({
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: '../templates/login.component.html',
+  styleUrls: ['../styles/login.component.css']
 })
 
 export class LoginComponent implements OnInit{

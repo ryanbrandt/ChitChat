@@ -1,13 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { DataService } from '../services/data-service/data-service.service';
-import { AlertService } from '../services/alert-service/alert-service.service';
 import { Router } from '@angular/router';
+import { DataService } from '../../../global/services/data-service.service';
+import { AlertService } from '../../../global/services/alert-service.service';
 import * as $ from 'jquery';
 
-
 @Component({
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  templateUrl: '../templates/register.component.html',
+  styleUrls: ['../styles/register.component.css']
 })
 
 export class RegisterComponent implements OnInit {
@@ -33,7 +32,7 @@ export class RegisterComponent implements OnInit {
 					this.alertService.error(this.dataService.response[key][0]);
 				}
 			} else {
-				//TODO: redirect to an internal error page here
+				this.alertService.unauthorized('Sorry, Im having trouble connecting to our servers :(');
 			}
 		}
 	}

@@ -1,10 +1,10 @@
 import { Component, OnInit, HostListener} from '@angular/core';
-import { DataService } from '../services/data-service/data-service.service';
-import { AlertService } from '../services/alert-service/alert-service.service';
+import { DataService } from '../../../global/services/data-service.service';
+import { AlertService } from '../../../global/services/alert-service.service';
 
 @Component({
-  templateUrl: './inbox.component.html',
-  styleUrls: ['./inbox.component.css']
+  templateUrl: '../templates/inbox.component.html',
+  styleUrls: ['../styles/inbox.component.css']
 })
 
 export class InboxComponent implements OnInit {
@@ -19,20 +19,26 @@ export class InboxComponent implements OnInit {
 
 	async ngOnInit(){ 
 		this.loader = document.getElementById('loader');
- 		await this.dataService.getData();
- 		this.loader.style.display = "none";
- 		this.isLoaded = true;
+ 		this.toggleActive(false);
  	}
 	
-	async toggleActive() {  
-	    $('.tab').removeClass('active');
-	    $(event.target).addClass('active');
+	async toggleActive(isInit = true) {  
+		if(isInit){
+			this.alertService.clear();
+		    $('.tab').removeClass('active');
+		    $(event.target).addClass('active');
+		}
 	    this.isLoaded = false;
 	    this.loader.style.display = "block";
 	    // this.dataService.url = 'my endpoint for the button clicked, still to create :P';
 	    await this.dataService.getData();
+	    if(this.requestFailed()){ this.alertService.unauthorized('Sorry, Im having trouble connecting to our servers :('); }
 	    this.loader.style.display = "none";
 	    this.isLoaded = true;
+ 	}
+
+ 	requestFailed(){
+ 		return this.dataService.responseStatus != 200;
  	}
 
  	isEmpty(){
