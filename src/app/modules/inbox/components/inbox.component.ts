@@ -1,6 +1,8 @@
 import { Component, OnInit, HostListener} from '@angular/core';
+import { Router } from  '@angular/router';
 import { DataService } from '../../../global/services/data-service.service';
 import { AlertService } from '../../../global/services/alert-service.service';
+import { UserService } from '../../../global/services/user-service.service';
 
 @Component({
   templateUrl: '../templates/inbox.component.html',
@@ -13,15 +15,16 @@ export class InboxComponent implements OnInit {
 	loader;
 	isLoaded = false;
 
-	constructor(private dataService: DataService, private alertService: AlertService){ 
-		this.dataService.url = 'http://localhost:8000/message/';
-	}
-
-	async ngOnInit(){ 
+	ngOnInit(){  
+		if(!this.userService.currentUser){ this.router.navigate(['']); }
 		this.loader = document.getElementById('loader');
  		this.toggleActive(false);
  	}
-	
+
+	constructor(private dataService: DataService, private alertService: AlertService, private userService: UserService, private router: Router){ 
+		this.dataService.url = `http://localhost:8000/inbox/${ this.userService.currentUser.userId }`;
+	}
+
 	async toggleActive(isInit = true) {  
 		if(isInit){
 			this.alertService.clear();

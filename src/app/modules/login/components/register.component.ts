@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../../../global/services/data-service.service';
 import { AlertService } from '../../../global/services/alert-service.service';
+import { UserService } from '../../../global/services/user-service.service';
 import * as $ from 'jquery';
 
 @Component({
@@ -11,7 +12,7 @@ import * as $ from 'jquery';
 
 export class RegisterComponent implements OnInit {
 
-	constructor(private dataService: DataService, private alertService: AlertService, private router: Router){
+	constructor(private dataService: DataService, private alertService: AlertService, private router: Router, private userService: UserService ){
 		this.dataService.url = 'http://localhost:8000/user/';
 	}
 
@@ -38,6 +39,7 @@ export class RegisterComponent implements OnInit {
 	}
 	
 	ngOnInit(){
+		if(this.userService.currentUser){ this.router.navigate(['inbox']); }
 		$('#registerForm').slideDown('slow', function(){
 			});
 	}
