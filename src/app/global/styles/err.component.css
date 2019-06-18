@@ -1,0 +1,21 @@
+h1, h4 {
+	padding: 10px;
+}
+
+#sorry {
+	font-style: italic;
+}
+
+a {
+	font-size: 24px;
+}
+
+footer {
+	margin-bottom: 20vh;
+	bottom: 0;
+	position: absolute;
+}
+
+.icon {
+	text-align: center;
+}

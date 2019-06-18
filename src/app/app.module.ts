@@ -7,6 +7,7 @@ import { TopBarComponent } from './modules/top-bar/components/top-bar.component'
 import { AlertComponent} from './global/components/alert.component';
 import { UserService } from './global/services/user-service.service';
 import { AuthInterceptor } from './global/services/http.interceptor';
+import { ErrComponent } from './global/components/err.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { AuthInterceptor } from './global/services/http.interceptor';
   declarations: [
   	AppComponent,
   	TopBarComponent,  
-    AlertComponent
+    AlertComponent,
+    ErrComponent
   ],
   providers: [
     UserService,

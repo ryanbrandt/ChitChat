@@ -24,11 +24,11 @@ export class LoginComponent implements OnInit{
 		var form = event.target;
 		this.dataService.payload = {'username': form['username'].value, 'password': form['password'].value};
 		await this.dataService.postData();
-		if(this.dataService.responseStatus == 400 || this.dataService.responseStatus == 404){ 
-			this.alertService.error('The username or password entered is incorrect'); 
-		} else {
+		if(this.dataService.responseStatus == 201){ 
 			this.userService.currentUser = new User(this.dataService.response['id'], form['username'], this.dataService.response['token']);
 			this.router.navigate(['inbox']);
+		} else {
+			this.alertService.error('The username or password entered is incorrect'); 
 		}
 	}
 
