@@ -35,13 +35,8 @@ export class InboxComponent implements OnInit {
 	    this.loader.style.display = "block";
 	    // this.dataService.url = 'my endpoint for the button clicked, still to create :P';
 	    await this.dataService.getData();
-	    if(this.requestFailed()){ this.alertService.unauthorized('Sorry, Im having trouble connecting to our servers :('); }
 	    this.loader.style.display = "none";
 	    this.isLoaded = true;
- 	}
-
- 	requestFailed(){
- 		return this.dataService.responseStatus != 200;
  	}
 
  	isEmpty(){

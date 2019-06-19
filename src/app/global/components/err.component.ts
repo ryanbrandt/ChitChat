@@ -9,9 +9,9 @@ import { Location } from '@angular/common';
 export class ErrComponent { 
 
 	constructor(private location: Location){ }
+	// TODO: contact
 
 	goBack(){
 		this.location.back();
 	}
-	
 }

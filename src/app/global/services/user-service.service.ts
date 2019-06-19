@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from  '@angular/router';
 import { User } from '../models/user-models';
 
 /* global user management service */
@@ -9,8 +10,11 @@ import { User } from '../models/user-models';
 export class UserService {
 	currentUser: User;
 
-	constructor(){}
+	constructor(private router: Router){}
 
+	logout(){
+		this.router.navigate(['']);
+	}
 
 
 

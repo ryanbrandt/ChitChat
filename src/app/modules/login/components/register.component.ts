@@ -18,24 +18,19 @@ export class RegisterComponent implements OnInit {
 
 	/* register user on submit */
 	@HostListener('submit', ['$event']) async onSubmit(){
-		this.alertService.clear();
 		event.preventDefault();
+		this.alertService.clear();
+		$('#loader').css('display', 'block');
 		var form = event.target;
-		this.dataService.payload = {"username": form['username'].value, "password": form['password'].value, "phone": parseInt(form['phone'].value.replace('-', '')) };
-		await this.dataService.postData();	
-		
-		if(this.dataService.responseStatus == 201){
+		this.dataService.payload = {"username": form['username'].value, "password": form['password'].value, "phone": parseInt(form['phone'].value.split('-').join('')) };
+		await this.dataService.postData();
+		$('#loader').css('display', 'none')
+		if(this.dataService.responseStatus != 400 && this.dataService.responseStatus != 0){	
+			console.log(this.dataService.responseStatus);
 			this.alertService.success('Account successfully created for ' + form['username'].value + '! Login below', true);
 			this.router.navigate(['']);
-		} else {
-			if(this.dataService.responseStatus == 400){
-				for(var key in this.dataService.response){
-					this.alertService.error(this.dataService.response[key][0]);
-				}
-			} else {
-				this.alertService.unauthorized('Sorry, Im having trouble connecting to our servers :(');
-			}
 		}
+		
 	}
 	
 	ngOnInit(){

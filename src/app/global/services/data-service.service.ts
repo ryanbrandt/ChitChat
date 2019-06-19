@@ -16,17 +16,16 @@ export class DataService {
 
   	/* generic get */
 	getData() {
+		this.responseStatus = 200;
 		let promise = new Promise((resolve) => {
 			this.http.get(this.url)
 				.toPromise()
 				.then(
 					res => {	
-						this.responseStatus = 200;
 						this.response = res;
 						resolve();
 					},
 					err => { 
-						this.responseStatus = err.status;
 						resolve();
 					}
 
@@ -37,18 +36,16 @@ export class DataService {
 
 	/* generic post */
 	postData() {
+		this.responseStatus = 201;
 		let promise = new Promise((resolve) => {
 			this.http.post(this.url, this.payload)
 				.toPromise()
 				.then(
 					res => {	
-						this.responseStatus = 201;
 						this.response = res;
 						resolve();
 					},
 					err => { 
-						this.responseStatus = err.status;
-						this.response = err['error'];
 						resolve();
 					}
 				);
@@ -58,18 +55,16 @@ export class DataService {
 
 	/* generic put; didn't implement patch in API so need ALL data here */
 	putData() {
+		this.responseStatus = 200;
 		let promise = new Promise((resolve) => {
 			this.http.put(this.url, this.payload)
 				.toPromise()
 				.then(
 					res => {
-						this.responseStatus = 200;
 						this.response = res;
 						resolve();
 					},
 					err => {
-						this.responseStatus = err.status;
-						this.response = err['error'];
 						resolve();
 					}
 				);
@@ -79,17 +74,15 @@ export class DataService {
 
 	/* generic delete; always need to call a detail endpoint */
 	deleteData() {
+		this.responseStatus = 204;
 		let promise = new Promise((resolve) => {
 			this.http.delete(this.url)
 				.toPromise()
 				.then(
 					res => {
-						this.responseStatus = 204;
 						resolve();
 					},
 					err => {
-						this.responseStatus = err.status;
-						this.response = err['error'];
 						resolve()
 					}
 				);

@@ -8,3 +8,7 @@
 	content: "*";
 	color: red;
 }
+
+#loader {
+	display: none;
+}

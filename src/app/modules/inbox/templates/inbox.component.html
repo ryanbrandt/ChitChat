@@ -22,8 +22,15 @@
 <!-- Generates Bootstrap cards per Message Thread/Contacts -->
 <div class="inbox-data" *ngFor="let key of Object.keys(dataService.response)">
   <div class="card-body">
-    <h5 class="card-title">{{ dataService.response[key].message.author }}</h5>
-    <p class="card-text">{{ dataService.response[key].message.content }}</p>
+    <div [ngSwitch]="dataService.response[key].message.author_id">
+      <div *ngSwitchCase="userService.currentUser.id">
+        <h5 class="card-title">{{ dataService.response[key].message.author }}</h5>
+      </div>
+      <div *ngSwitchDefault>
+        <h5 class="card-title">{{ dataService.response[key].recipient }}</h5>
+      </div>
+    </div>
+    <p class="card-text">{{ dataService.response[key].message.author }} : {{ dataService.response[key].message.content }}</p>
     <a href="#" class="btn btn-primary">View</a>
   </div>
   <hr>

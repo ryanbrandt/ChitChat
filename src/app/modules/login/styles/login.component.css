@@ -5,3 +5,7 @@
 #loginForm {
 	display: none;
 }
+
+#loader {
+	display: none;
+}
