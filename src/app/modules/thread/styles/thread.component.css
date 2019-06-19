@@ -1,0 +1,22 @@
+#loader {
+	display: none;
+}
+
+.container {
+	height: 70vh;
+	overflow-y: auto;
+}
+
+.alert {
+	margin-top: 2vh;
+	margin-bottom: 2vh;
+	width: 90%;
+}
+
+.alert-primary {
+	float: right;
+}
+
+.alert-secondary {
+	float: left;
+}

@@ -1,0 +1,66 @@
+<div class="container">
+	<ul>
+		<!-- Iterate about object array if multiple msgs -->
+		<div *ngIf="!dataService.response.message;else oneMessage">
+			<div *ngFor="let key of Object.keys(dataService.response)">
+				<div [ngSwitch]="dataService.response[key].message.author_id">
+					<div *ngSwitchCase="userService.currentUser.userId">
+						<div class="alert alert-primary">
+							<strong>You</strong>
+							<p>
+								{{ dataService.response[key].message.content }}
+							</p>
+							<small>{{ dataService.response[key].message.timestamp | date: 'hh-mm a yyy-MM-dd'}}</small>
+						</div>
+					</div>
+					<div *ngSwitchDefault>
+						<div class="alert alert-secondary">
+							<strong>{{ dataService.response[key].message.author }}</strong>
+							<p>
+								{{ dataService.response[key].message.content }}
+							</p>
+							<small>{{ dataService.response[key].message.timestamp | date: 'hh-mm a yyy-MM-dd'}}</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- else only one object, access is different; this can be done better -->
+		<ng-template #oneMessage>
+			<div [ngSwitch]="dataService.response.message.author_id">
+				<div *ngSwitchCase="userService.currentUser.userId">
+					<div class="alert alert-primary">
+						<strong>You</strong>
+						<p>
+							{{ dataService.response.message.content }}
+						</p>
+						<small>{{ dataService.response.message.timestamp | date: 'hh-mm a yyy-MM-dd'}}</small>
+					</div>
+				</div>
+				<div *ngSwitchDefault>
+					<div class="alert alert-secondary">
+						<strong>{{ dataService.response.message.author }}</strong>
+						<p>
+							{{ dataService.response.message.content }}
+						</p>
+						<small>{{ dataService.response.message.timestamp | date: 'hh-mm a yyy-MM-dd'}}</small>
+					</div>
+				</div>
+			</div>
+		</ng-template>
+	</ul>
+</div>
+<form>
+	<div class="form-group">
+        <label for="message">Message</label>
+        <textarea class="form-control" name="message" required></textarea>
+    </div>
+    <div class="form-group" align="center">
+        <button type="submit" class="btn btn-primary" align="right">Send</button>
+    </div>
+</form>
+<div class="text-center" id="loader">
+    <div class="spinner-border text-dark" role="status">
+       <span class="sr-only">Loading...</span>
+    </div>
+</div>

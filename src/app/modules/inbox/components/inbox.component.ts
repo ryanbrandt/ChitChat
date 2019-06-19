@@ -39,6 +39,12 @@ export class InboxComponent implements OnInit {
 	    this.isLoaded = true;
  	}
 
+ 	async getThread(event){
+ 		// set url parameters to fetch thread, goto thread
+ 		this.dataService.url =`http://localhost:8000/message/user/${ this.userService.currentUser.userId }/user/${ event.target.value }`
+ 		this.router.navigate(['thread']);
+ 	}
+
  	isEmpty(){
  		return !this.dataService.response || Object.keys(this.dataService.response).length == 0;
  	}
