@@ -17,7 +17,8 @@ export class RegisterComponent implements OnInit {
 	}
 
 	/* register user on submit */
-	@HostListener('submit', ['$event']) async onSubmit(){
+	@HostListener('submit', ['$event']) 
+	async registerUser(){
 		event.preventDefault();
 		this.alertService.clear();
 		$('#loader').css('display', 'block');
@@ -34,9 +35,8 @@ export class RegisterComponent implements OnInit {
 	}
 	
 	ngOnInit(){
-		if(this.userService.currentUser){ this.router.navigate(['inbox']); }
-		$('#registerForm').slideDown('slow', function(){
-			});
+		if(this.userService.getUserId()){ this.router.navigate(['inbox']); }
+		$('#registerForm').slideDown('slow', function(){ });
 	}
 	
 

@@ -3,13 +3,12 @@
 }
 
 .container {
-	height: 70vh;
+	height: 66vh;
 	overflow-y: auto;
 }
 
 .alert {
-	margin-top: 2vh;
-	margin-bottom: 2vh;
+	margin-bottom: 1vh;
 	width: 90%;
 }
 
@@ -19,4 +18,12 @@
 
 .alert-secondary {
 	float: left;
+}
+
+.fa-arrow-left:hover {
+	color: #007bff;
+}
+
+#retInbox {
+	color: inherit;
 }

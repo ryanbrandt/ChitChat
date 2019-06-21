@@ -17,7 +17,7 @@ export class TopBarComponent implements OnInit {
 
 	/* Nav active class management */
 	@HostListener('click', ['$event']) toggleActive(){
-		if(this.userService.currentUser){
+		if(this.userService.getUserId()){
 			$('.bar').removeClass('active');
 			$(event.target).addClass('active');
 		}

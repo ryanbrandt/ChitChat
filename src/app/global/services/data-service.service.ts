@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { UserService } from './user-service.service';
 
 /* global data retrieval service to make API calls */
 @Injectable({
@@ -26,6 +25,7 @@ export class DataService {
 						resolve();
 					},
 					err => { 
+						console.log(err);
 						resolve();
 					}
 

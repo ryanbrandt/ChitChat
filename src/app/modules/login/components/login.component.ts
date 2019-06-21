@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit{
 	}
 
 	/* validate user on submit */
-	@HostListener('submit', ['$event']) async onSubmit(){
+	@HostListener('submit', ['$event']) 
+	async loginUser(){
 		event.preventDefault();
 		$('#loader').css('display', 'block');
 		this.alertService.clear();
@@ -27,15 +28,14 @@ export class LoginComponent implements OnInit{
 		await this.dataService.postData();
 		$('#loader').css('display', 'none');
 		if(this.dataService.responseStatus != 400 && this.dataService.responseStatus != 0){
-			this.userService.currentUser = new User(this.dataService.response['id'], form['username'].value, this.dataService.response['token']);
+			this.userService.setCurrentUser(this.dataService.response['id'], form['username'].value, this.dataService.response['token']);
 			this.router.navigate(['inbox']);
 		}
 	}
 
 	ngOnInit(){
-		if(this.userService.currentUser){ this.router.navigate(['inbox']); }
-		$('#loginForm').slideDown("slow", function(){
-			});
+		if(this.userService.getUserId()){ this.router.navigate(['inbox']); }
+		$('#loginForm').slideDown("slow", function(){ });
 	}
 	
 

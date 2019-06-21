@@ -16,13 +16,13 @@ export class InboxComponent implements OnInit {
 	isLoaded = false;
 
 	ngOnInit(){  
-		if(!this.userService.currentUser){ this.router.navigate(['']); }
+		if(!this.userService.getUserId()){ this.router.navigate(['']); }
 		this.loader = document.getElementById('loader');
  		this.toggleActive(false);
  	}
 
 	constructor(private dataService: DataService, private alertService: AlertService, private userService: UserService, private router: Router){ 
-		this.dataService.url = `http://localhost:8000/inbox/${ this.userService.currentUser.userId }`;
+		this.dataService.url = `http://localhost:8000/inbox/${ this.userService.getUserId() }`;
 	}
 
 	async toggleActive(isInit = true) {  
@@ -41,7 +41,7 @@ export class InboxComponent implements OnInit {
 
  	async getThread(event){
  		// set url parameters to fetch thread, goto thread
- 		this.dataService.url =`http://localhost:8000/message/user/${ this.userService.currentUser.userId }/user/${ event.target.value }`
+ 		this.dataService.url =`http://localhost:8000/message/user/${ this.userService.getUserId() }/user/${ event.target.value }`;
  		this.router.navigate(['thread']);
  	}
 

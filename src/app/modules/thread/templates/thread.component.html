@@ -1,10 +1,11 @@
+<a id="retInbox" routerLink="/inbox"><i class="fas fa-arrow-left fa-2x"></i></a>
 <div class="container">
 	<ul>
 		<!-- Iterate about object array if multiple msgs -->
 		<div *ngIf="!dataService.response.message;else oneMessage">
 			<div *ngFor="let key of Object.keys(dataService.response)">
 				<div [ngSwitch]="dataService.response[key].message.author_id">
-					<div *ngSwitchCase="userService.currentUser.userId">
+					<div *ngSwitchCase="userService.getUserId()">
 						<div class="alert alert-primary">
 							<strong>You</strong>
 							<p>
@@ -28,7 +29,7 @@
 		<!-- else only one object, access is different; this can be done better -->
 		<ng-template #oneMessage>
 			<div [ngSwitch]="dataService.response.message.author_id">
-				<div *ngSwitchCase="userService.currentUser.userId">
+				<div *ngSwitchCase="userService.getUserId()">
 					<div class="alert alert-primary">
 						<strong>You</strong>
 						<p>

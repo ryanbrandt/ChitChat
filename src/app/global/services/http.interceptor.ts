@@ -14,10 +14,10 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private userService: UserService, private router: Router, private alertService: AlertService, private dataService: DataService){ }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if(this.userService.currentUser){
+    if(this.userService.getUserId()){
       req = req.clone({
         setHeaders: {
-          authorization: `token ${ this.userService.currentUser.token }`
+          authorization: `token ${ this.userService.getToken() }`
         }
       });
     }
