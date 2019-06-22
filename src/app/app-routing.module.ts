@@ -6,6 +6,7 @@ const routes: Routes = [
 	{ path: '', loadChildren: './modules/login/login.module#LoginModule' },
 	{ path: 'inbox', loadChildren: './modules/inbox/inbox.module#InboxModule' },
 	{ path: 'thread', loadChildren: './modules/thread/thread.module#ThreadModule'},
+	{ path: 'settings', loadChildren: './modules/settings/settings.module#SettingsModule'},
 	{ path: 'err', component: ErrComponent }
 ];
 

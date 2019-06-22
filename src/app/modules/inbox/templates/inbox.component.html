@@ -2,13 +2,13 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a class="nav-link tab active" (click)="toggleActive()">Inbox</a>
+        <a class="nav-link tab active" (click)="toggleActive(true, $event)" id="user">Inbox</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link tab" (click)="toggleActive()">Groups</a>
+        <a class="nav-link tab" (click)="toggleActive(true, $event)" id="group">Groups</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link tab" (click)="toggleActive()">Contacts</a>
+        <a class="nav-link tab disabled" (click)="toggleActive(true, $event)" id="contact">Contacts</a>
       </li>
     </ul>
   </div>
@@ -19,50 +19,60 @@
       </div>
     </div>
   </div>
-<!-- Generates Bootstrap cards per Message Thread/User Contacts if multiple -->
-  <div *ngIf="!dataService.response.message; else oneThread">
-    <div class="inbox-data" *ngFor="let key of Object.keys(dataService.response)">
-      <div class="card-body">
-        <h5 class="card-title">
-          {{ dataService.response[key].message.author_id == userService.getUserId() ? dataService.response[key].recipient : dataService.response[key].message.author }}
-        </h5>
-        <p class="card-text">
-          <strong id="lastAuthor">
-            {{ dataService.response[key].message.author_id == userService.getUserId() ? 'You' : dataService.response[key].message.author }}
-          </strong>: 
-            {{ dataService.response[key].message.content | slice:0:25 }} {{ dataService.response[key].message.content.length > 25 ? '...' : '' }}
-            <br/>
-            <small>{{ dataService.response[key].message.timestamp | date: 'hh:mm a yyy-MM-dd' }}</small>
-        </p>
-        <!-- Value = PK of User messaging with in this thread -->
-        <button class="btn btn-primary" (click)="getThread($event)" [attr.value]="dataService.response[key].message.author_id == userService.getUserId() ? dataService.response[key].recipient_id : dataService.response[key].message.author_id">View</button>
+<!-- Generates Bootstrap cards per Message Thread -->
+  <div *ngIf="dataService.response; else nothingHere">
+    <div *ngIf="!dataService.response.message; else oneThread">
+      <div *ngFor="let key of Object.keys(dataService.response)">
+        <div class="card-body">
+          <!-- UserMessage Header: Show User -->
+          <h5 class="card-title" *ngIf="dataService.response[key].recipient">
+            {{ dataService.response[key].message.author_id == userService.getUserId() ? dataService.response[key].recipient : dataService.response[key].message.author }}
+          </h5>
+          <!-- GroupMessage Header: Show Group -->
+          <h5 *ngIf="dataService.response[key].group">
+            {{ dataService.response[key].group }}
+          </h5>
+          <p class="card-text">
+            <strong id="lastAuthor">
+              {{ dataService.response[key].message.author_id == userService.getUserId() ? 'You' : dataService.response[key].message.author }}
+            </strong>: 
+              {{ dataService.response[key].message.content | slice:0:25 }} {{ dataService.response[key].message.content.length > 25 ? '...' : '' }}
+              <br/>
+              <small>{{ dataService.response[key].message.timestamp | date: 'hh:mm a yyy-MM-dd' }}</small>
+          </p>
+          <!-- UserMessage Button Value = PK of User messaging with in this thread -->
+          <button *ngIf="dataService.response[key].recipient" class="btn btn-primary" (click)="getThread($event)" [attr.value]="dataService.response[key].message.author_id == userService.getUserId() ? dataService.response[key].recipient_id : dataService.response[key].message.author_id">
+          View
+          </button>
+          <!-- GroupMessage Button Value = PK of Group -->
+          <button *ngIf="dataService.response[key].group" class="btn btn-primary" (click)="getThread($event)" [attr.value]="dataService.response[key].group_id">View</button>
+        </div>
+        <hr>
       </div>
-      <hr>
     </div>
+    <!-- If only one thread returned from api for this user; access is different -->
+    <ng-template #oneThread>
+      <div class="card-body">
+          <h5 class="card-title">
+            {{ dataService.response.message.author_id == userService.getUserId() ? dataService.response.recipient : dataService.response.message.author }}
+          </h5>
+          <p class="card-text">
+            <strong id="lastAuthor">
+              {{ dataService.response.message.author_id == userService.getUserId() ? 'You' : dataService.response.message.author }}
+            </strong>: 
+              {{ dataService.response.message.content | slice:0:25 }} {{ dataService.response.message.content.length > 25 ? '...' : '' }}
+              <br/>
+              <small>{{ dataService.response.message.timestamp | date: 'hh:mm a yyy-MM-dd' }}</small>
+          </p>
+          <!-- Value = PK of User messaging with in this thread -->
+          <button class="btn btn-primary" (click)="getThread($event)" [attr.value]="dataService.response.message.author_id == userService.getUserId() ? dataService.response.recipient_id : dataService.response.message.author_id">View</button>
+        </div>
+    </ng-template>
   </div>
-  <!-- If only one thread returned from api for this user; access is different -->
-  <ng-template #oneThread>
-    <div class="card-body">
-        <h5 class="card-title">
-          {{ dataService.response.message.author_id == userService.getUserId() ? dataService.response.recipient : dataService.response.message.author }}
-        </h5>
-        <p class="card-text">
-          <strong id="lastAuthor">
-            {{ dataService.response.message.author_id == userService.getUserId() ? 'You' : dataService.response.message.author }}
-          </strong>: 
-            {{ dataService.response.message.content | slice:0:25 }} {{ dataService.response.message.content.length > 25 ? '...' : '' }}
-            <br/>
-            <small>{{ dataService.response.message.timestamp | date: 'hh:mm a yyy-MM-dd' }}</small>
-        </p>
-        <!-- Value = PK of User messaging with in this thread -->
-        <button class="btn btn-primary" (click)="getThread($event)" [attr.value]="dataService.response.message.author_id == userService.getUserId() ? dataService.response.recipient_id : dataService.response.message.author_id">View</button>
-      </div>
-  </ng-template>
 <!-- Display if No Messages/Contacts -->
-<div *ngIf="isLoaded">
-  <div *ngIf="isEmpty()">
+  <ng-template #nothingHere>
     <p>
       <small>Theres nothing here...</small>
     </p>
-  </div>
+  </ng-template>
 </div>

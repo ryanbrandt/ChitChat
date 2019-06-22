@@ -1,6 +1,6 @@
 <!-- Master Navigation -->
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">ChitChat!</a>
+    <a class="navbar-brand brand-custom"><i class="far fa-envelope"></i> ChitChat!</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,12 +11,14 @@
                 <a class="nav-link bar" href="#" routerLink="/inbox" id="message">Message Center</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link bar" href="#">Settings</a>
+                <a class="nav-link bar" href="#" routerLink="/settings">Settings</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link bar danger" href="#" (click)="userService.logout()">Logout</a>
             </li>
         </ul>
+        <!-- Notification icon: TODO: link sup to websocket -->
+        <i class="far fa-bell fa-lg"><sup>1</sup></i>
         <!-- Search Element -->
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search Users/Messages" aria-label="Search">

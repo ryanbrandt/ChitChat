@@ -13,7 +13,7 @@ export class InboxComponent implements OnInit {
 	Object = Object;
 	// not elegent, but pass Object to template to iterate over API response
 	loader;
-	isLoaded = false;
+	curTab = 'user';
 
 	ngOnInit(){  
 		if(!this.userService.getUserId()){ this.router.navigate(['']); }
@@ -25,28 +25,44 @@ export class InboxComponent implements OnInit {
 		this.dataService.url = `http://localhost:8000/inbox/${ this.userService.getUserId() }`;
 	}
 
-	async toggleActive(isInit = true) {  
+	async toggleActive(isInit = true, event=null) {  
 		if(isInit){
 			this.alertService.clear();
 		    $('.tab').removeClass('active');
 		    $(event.target).addClass('active');
 		}
-	    this.isLoaded = false;
 	    this.loader.style.display = "block";
+	    if(event){
+	    	switch(event.target.id){
+	    		case 'user':
+	    			this.curTab = 'user';
+	    			this.dataService.url = `http://localhost:8000/inbox/${ this.userService.getUserId() }`;
+	    			break;
+	    		case 'group':
+	    			this.curTab = 'group';
+	    			this.dataService.url = `http://localhost:8000/inbox/group/${ this.userService.getUserId() }`;
+	    			break;
+	    		case 'contact':
+	    			// TODO
+	    	}
+	    }
 	    // this.dataService.url = 'my endpoint for the button clicked, still to create :P';
 	    await this.dataService.getData();
 	    this.loader.style.display = "none";
-	    this.isLoaded = true;
  	}
 
  	async getThread(event){
  		// set url parameters to fetch thread, goto thread
- 		this.dataService.url =`http://localhost:8000/message/user/${ this.userService.getUserId() }/user/${ event.target.value }`;
+ 		console.log(this.curTab);
+ 		switch(this.curTab){
+ 			case 'user':
+ 				this.dataService.url =`http://localhost:8000/message/user/${ this.userService.getUserId() }/user/${ event.target.value }`;
+ 				break;
+ 			case 'group':
+ 				this.dataService.url =`http://localhost:8000/message/group/${ event.target.value }`;
+ 		}
+ 		
  		this.router.navigate(['thread']);
- 	}
-
- 	isEmpty(){
- 		return !this.dataService.response || Object.keys(this.dataService.response).length == 0;
  	}
 
 }
