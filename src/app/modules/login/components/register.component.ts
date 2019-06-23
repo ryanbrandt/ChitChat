@@ -13,7 +13,7 @@ import * as $ from 'jquery';
 export class RegisterComponent implements OnInit {
 
 	constructor(private dataService: DataService, private alertService: AlertService, private router: Router, private userService: UserService ){
-		this.dataService.url = 'http://localhost:8000/user/';
+		this.dataService.setUrl('http://localhost:8000/user/');
 	}
 
 	/* register user on submit */

@@ -1,0 +1,46 @@
+<a href="#" (click)="retThread($event)" id="retThread"><i class="fas fa-arrow-left fa-lg"></i></a>
+<section class="maintenance-frame">
+	<form>
+		<div class="form-group">
+			<label for="name">Group Name</label>
+			<input type="text" class="form-control" id="name" [attr.value]="dataService.response['name']" required>
+		</div>
+		<div class="form-group" align="center">
+          	<button type="submit" class="btn btn-primary" align="center" [disabled]="!updated">Update</button>
+        </div>	
+        <div align="center" class="maintenace-detail">
+        	<a href="#" (click)="addToGroup($event)"><small>Add Members</small></a>
+    	</div>
+         <div class="text-center" id="loader">
+        	<div class="spinner-border text-dark" role="status">
+          		<span class="sr-only">Loading...</span>
+        	</div>
+      	</div>
+	</form>
+	<section class="member-list">
+		<h4>Members</h4>
+		<ul class="list-group" *ngFor="let key of Object.keys(dataService.response.users)">
+			<li class="list-group-item">
+				{{ dataService.response.users[key].username }}
+				<a href="#" id="leaveGroup" *ngIf="dataService.response.users[key].user_id == userService.getUserId()" (click)="leaveGroup($event)">Leave Group</a>
+			</li>
+		</ul>
+	</section>
+	<!-- Add Members Modal -->
+	<div class="modal" tabindex="-1" role="dialog" id="addModal">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Add Members</h5>
+	      </div>
+	      <div class="modal-body">
+		      an auto-completing search bar here
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary">Add Users</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</section>

@@ -20,10 +20,15 @@
 	float: left;
 }
 
-.fa-arrow-left:hover {
+.fas:hover {
 	color: #007bff;
 }
 
 #retInbox {
 	color: inherit;
+}
+
+#cogSettings {
+	color: inherit;
+	float: right;
 }

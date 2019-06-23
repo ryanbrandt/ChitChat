@@ -1,25 +1,39 @@
 <section class="maintenance-frame">
-		<form>
-			<div class="form-group">
-				<label for="username">Username</label>
-				<input type="text" class="form-control" id="username" [attr.value]="dataService.response['username']" required>
-			</div>
-			<div class="form-group">
-				<label for="phone">Phone</label>
-				<input  type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="phone" [attr.value]="dataService.response['phone']?.toString().slice(0,3)+'-'+dataService.response['phone']?.toString().slice(3,6)+'-'+dataService.response['phone']?.toString().slice(6)" required>
-				<small class="form-text text-muted">Format: XXX-XXX-XXXX</small>
-			</div>
-			<div class="form-group" align="center">
-          		<button type="submit" class="btn btn-primary" align="center" [disabled]="!updated">Update</button>
-        	</div>	
-		</form>
-		<div align="center" class="maintenace-detail">
-        	<a href="#"><small>Update Your Password</small></a>
-      	</div>
-      	<div align="center" class="maintenace-detail">
-        	<a href="#"><small>Manage Groups</small></a>
-      	</div>
-      	<div align="center" class="maintenace-detail">
-        	<a href="#"><small>Delete Your Account</small></a>
-      	</div>
+	<form>
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input type="text" class="form-control" id="username" [attr.value]="dataService.response['username']" required>
+		</div>
+		<div class="form-group">
+			<label for="phone">Phone</label>
+			<input  type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="phone" [attr.value]="dataService.response['phone']?.toString().slice(0,3)+'-'+dataService.response['phone']?.toString().slice(3,6)+'-'+dataService.response['phone']?.toString().slice(6)" required>
+			<small class="form-text text-muted">Format: XXX-XXX-XXXX</small>
+		</div>
+		<div class="form-group" align="center">
+          	<button type="submit" class="btn btn-primary" align="center" [disabled]="!updated">Update</button>
+        </div>	
+	</form>
+	<div align="center" class="maintenace-detail">
+        <a href="#"><small>Update Your Password</small></a>
+    </div>
+    <div align="center" class="maintenace-detail">
+        <a href="#" (click)="confirmDeletion($event)"><small>Delete Your Account</small></a>
+    </div>
+    <!-- Deletion Confirmation Modal -->
+	<div class="modal" tabindex="-1" role="dialog" id="confirmModal">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Are You Sure?</h5>
+	      </div>
+	      <div class="modal-body">
+	        <p>This action <strong>cannot</strong> be undone.<br/>All data associated with this account will be lost.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" (click)="doDeletion()">Confirm Deletion</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </section>

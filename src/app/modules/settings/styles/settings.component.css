@@ -5,3 +5,23 @@
 .maintenance-detail {
 	padding: 5px;
 }
+
+.member-list {
+	margin-top: 5vh;
+}
+
+#leaveGroup {
+	float: right;
+}
+
+#loader {
+	display: none;
+}
+
+#retThread {
+	color: inherit;
+}
+
+.fas:hover {
+	color: #007bff;
+}

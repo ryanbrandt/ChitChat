@@ -22,7 +22,7 @@ export class InboxComponent implements OnInit {
  	}
 
 	constructor(private dataService: DataService, private alertService: AlertService, private userService: UserService, private router: Router){ 
-		this.dataService.url = `http://localhost:8000/inbox/${ this.userService.getUserId() }`;
+		this.dataService.setUrl(`http://localhost:8000/inbox/${ this.userService.getUserId() }`);
 	}
 
 	async toggleActive(isInit = true, event=null) {  
@@ -36,11 +36,11 @@ export class InboxComponent implements OnInit {
 	    	switch(event.target.id){
 	    		case 'user':
 	    			this.curTab = 'user';
-	    			this.dataService.url = `http://localhost:8000/inbox/${ this.userService.getUserId() }`;
+	    			this.dataService.setUrl(`http://localhost:8000/inbox/${ this.userService.getUserId() }`);
 	    			break;
 	    		case 'group':
 	    			this.curTab = 'group';
-	    			this.dataService.url = `http://localhost:8000/inbox/group/${ this.userService.getUserId() }`;
+	    			this.dataService.setUrl(`http://localhost:8000/inbox/group/${ this.userService.getUserId() }`);
 	    			break;
 	    		case 'contact':
 	    			// TODO
@@ -53,13 +53,12 @@ export class InboxComponent implements OnInit {
 
  	async getThread(event){
  		// set url parameters to fetch thread, goto thread
- 		console.log(this.curTab);
  		switch(this.curTab){
  			case 'user':
- 				this.dataService.url =`http://localhost:8000/message/user/${ this.userService.getUserId() }/user/${ event.target.value }`;
+ 				this.dataService.setUrl(`http://localhost:8000/message/user/${ this.userService.getUserId() }/user/${ event.target.value }`);
  				break;
  			case 'group':
- 				this.dataService.url =`http://localhost:8000/message/group/${ event.target.value }`;
+ 				this.dataService.setUrl(`http://localhost:8000/message/group/${ event.target.value }`);
  		}
  		
  		this.router.navigate(['thread']);

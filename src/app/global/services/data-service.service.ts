@@ -6,18 +6,26 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 	providedIn: 'root',
 })
 export class DataService {
-	url = '';
 	payload = {};
 	responseStatus = -1;
 	response = {};
 
   	constructor(private http: HttpClient) { }
 
+  	/* keep primary endpoint in local storage in case of refresh */
+  	setUrl(url: string){
+  		localStorage.setItem('url', url);
+  	}
+
+  	getUrl() {
+  		return localStorage.getItem('url').toString();
+  	}
+
   	/* generic get */
 	getData() {
 		this.responseStatus = 200;
 		let promise = new Promise((resolve) => {
-			this.http.get(this.url)
+			this.http.get(this.getUrl())
 				.toPromise()
 				.then(
 					res => {	
@@ -25,7 +33,6 @@ export class DataService {
 						resolve();
 					},
 					err => { 
-						console.log(err);
 						resolve();
 					}
 
@@ -38,7 +45,7 @@ export class DataService {
 	postData() {
 		this.responseStatus = 201;
 		let promise = new Promise((resolve) => {
-			this.http.post(this.url, this.payload)
+			this.http.post(this.getUrl(), this.payload)
 				.toPromise()
 				.then(
 					res => {	
@@ -53,11 +60,30 @@ export class DataService {
 		return promise;
 	}
 
-	/* generic put; didn't implement patch in API so need ALL data here */
+	/* generic put */
 	putData() {
 		this.responseStatus = 200;
 		let promise = new Promise((resolve) => {
-			this.http.put(this.url, this.payload)
+			this.http.put(this.getUrl(), this.payload)
+				.toPromise()
+				.then(
+					res => {
+						this.response = res;
+						resolve();
+					},
+					err => {
+						resolve();
+					}
+				);
+		});
+		return promise;
+	}
+
+	/* generic patch */
+	patchData() {
+		this.responseStatus = 200;
+		let promise = new Promise((resolve) => {
+			this.http.patch(this.getUrl(), this.payload)
 				.toPromise()
 				.then(
 					res => {
@@ -76,7 +102,7 @@ export class DataService {
 	deleteData() {
 		this.responseStatus = 204;
 		let promise = new Promise((resolve) => {
-			this.http.delete(this.url)
+			this.http.delete(this.getUrl())
 				.toPromise()
 				.then(
 					res => {

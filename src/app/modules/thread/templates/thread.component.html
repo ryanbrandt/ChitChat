@@ -1,4 +1,5 @@
-<a id="retInbox" routerLink="/inbox"><i class="fas fa-arrow-left fa-2x"></i></a>
+<a id="retInbox" routerLink="/inbox"><i class="fas fa-arrow-left fa-lg"></i></a>
+<a href="#" id="cogSettings" *ngIf="dataService.getUrl().toString().includes('group')" (click)="manageGroup($event)"><i class="fas fa-cog fa-lg"></i></a>
 <div class="container">
 	<ul>
 		<!-- Iterate about object array if multiple msgs -->
@@ -9,18 +10,18 @@
 						<div class="alert alert-primary">
 							<strong>You</strong>
 							<p>
-								{{ dataService.response[key].message.content }}
+								{{ dataService?.response[key].message.content }}
 							</p>
-							<small>{{ dataService.response[key].message.timestamp | date: 'hh-mm a yyy-MM-dd'}}</small>
+							<small>{{ dataService?.response[key].message.timestamp | date: 'hh:mm a yyy-MM-dd'}}</small>
 						</div>
 					</div>
 					<div *ngSwitchDefault>
 						<div class="alert alert-secondary">
-							<strong>{{ dataService.response[key].message.author }}</strong>
+							<strong>{{ dataService?.response[key].message.author }}</strong>
 							<p>
-								{{ dataService.response[key].message.content }}
+								{{ dataService?.response[key].message.content }}
 							</p>
-							<small>{{ dataService.response[key].message.timestamp | date: 'hh-mm a yyy-MM-dd'}}</small>
+							<small>{{ dataService?.response[key].message.timestamp | date: 'hh:mm a yyy-MM-dd'}}</small>
 						</div>
 					</div>
 				</div>
@@ -33,18 +34,18 @@
 					<div class="alert alert-primary">
 						<strong>You</strong>
 						<p>
-							{{ dataService.response.message.content }}
+							{{ dataService?.response.message.content }}
 						</p>
-						<small>{{ dataService.response.message.timestamp | date: 'hh-mm a yyy-MM-dd'}}</small>
+						<small>{{ dataService?.response.message.timestamp | date: 'hh:mm a yyy-MM-dd'}}</small>
 					</div>
 				</div>
 				<div *ngSwitchDefault>
 					<div class="alert alert-secondary">
-						<strong>{{ dataService.response.message.author }}</strong>
+						<strong>{{ dataService?.response.message.author }}</strong>
 						<p>
-							{{ dataService.response.message.content }}
+							{{ dataService?.response.message.content }}
 						</p>
-						<small>{{ dataService.response.message.timestamp | date: 'hh-mm a yyy-MM-dd'}}</small>
+						<small>{{ dataService?.response.message.timestamp | date: 'hh:mm a yyy-MM-dd'}}</small>
 					</div>
 				</div>
 			</div>
