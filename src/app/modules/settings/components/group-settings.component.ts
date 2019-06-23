@@ -5,6 +5,7 @@ import { DataService } from '../../../global/services/data-service.service';
 import { AlertService } from '../../../global/services/alert-service.service';
 import { UserService } from '../../../global/services/user-service.service';
 import * as $AB from 'jquery';
+import * as bootstrap from 'bootstrap';
 
 @Component({
 	templateUrl: '../templates/group-settings.component.html',

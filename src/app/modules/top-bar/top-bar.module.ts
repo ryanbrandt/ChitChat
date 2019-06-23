@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { TopBarComponent } from './components/top-bar.component';
 
 @NgModule({
-  declarations: [TopBarComponent],
+  declarations: [
+  	TopBarComponent
+  	],
   imports: [
     CommonModule
   ]
