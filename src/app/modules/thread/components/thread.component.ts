@@ -52,7 +52,7 @@ export class ThreadComponent implements OnInit {
  	manageGroup(event){
  		event.preventDefault();
  		localStorage.setItem('urlTmp', this.dataService.getUrl());
- 		this.dataService.setUrl(`http://localhost:8000/group/${ localStorage.getItem('urlTmp').slice(-1) }`);
+ 		this.dataService.setUrl(`http://localhost:8000/group/${ localStorage.getItem('urlTmp').split('/').pop() }`);
  		this.router.navigate(['settings/manage-group']);
  	}
 

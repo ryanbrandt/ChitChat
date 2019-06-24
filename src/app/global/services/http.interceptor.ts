@@ -29,9 +29,11 @@ export class AuthInterceptor implements HttpInterceptor {
         } else if(error.status == 403 || error.status == 401){
           this.alertService.unauthorized('You do not have permission to perform this action');
         } else if(error.status == 400) {
-          var msg = error['error'];
-          for(let [key, value] of Object.entries(msg)){
-            this.alertService.error(value[0]);
+          if(this.router.url == '/' || this.router.url == '/register'){
+            var msg = error['error'];
+            for(let [key, value] of Object.entries(msg)){
+              this.alertService.error(value[0]);
+            }
           }
         }
         return of(error);

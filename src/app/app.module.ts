@@ -9,6 +9,7 @@ import { AlertComponent} from './global/components/alert.component';
 import { UserService } from './global/services/user-service.service';
 import { AuthInterceptor } from './global/services/http.interceptor';
 import { ErrComponent } from './global/components/err.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as bootstrap from 'bootstrap';
 
 @NgModule({
@@ -16,7 +17,8 @@ import * as bootstrap from 'bootstrap';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    SearchModule
+    SearchModule,
+    BrowserAnimationsModule
   ],
   declarations: [
   	AppComponent,

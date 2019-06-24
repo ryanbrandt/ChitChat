@@ -1,6 +1,6 @@
 <a href="#" (click)="retThread($event)" id="retThread"><i class="fas fa-arrow-left fa-lg"></i></a>
 <section class="maintenance-frame">
-	<form>
+	<form id="groupMaint">
 		<div class="form-group">
 			<label for="name">Group Name</label>
 			<input type="text" class="form-control" id="name" [attr.value]="dataService.response['name']" required>
@@ -33,12 +33,11 @@
 	      <div class="modal-header">
 	        <h5 class="modal-title">Add Members</h5>
 	      </div>
-	      <div class="modal-body">
+	      <div class="modal-body" align="center">
 		      <app-search-bar></app-search-bar>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary">Add Users</button>
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+	        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
 	      </div>
 	    </div>
 	  </div>

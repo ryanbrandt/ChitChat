@@ -7,7 +7,7 @@ import { SearchRoutingModule } from './search-module.routing';
   declarations: [ SearchComponent ],
   imports: [
     CommonModule,
-    SearchRoutingModule
+    SearchRoutingModule,
   ],
   exports: [ SearchComponent ]
 })

@@ -9,6 +9,8 @@ export class DataService {
 	payload = {};
 	responseStatus = -1;
 	response = {};
+	// array of objects, holds nth responses if a page needs data from plural endpoints
+	nthResponse = [];
 
   	constructor(private http: HttpClient) { }
 
@@ -22,14 +24,19 @@ export class DataService {
   	}
 
   	/* generic get */
-	getData() {
+	getData(isNth=false) {
 		this.responseStatus = 200;
 		let promise = new Promise((resolve) => {
 			this.http.get(this.getUrl())
 				.toPromise()
 				.then(
-					res => {	
-						this.response = res;
+					res => {
+						// if an nth response item, add to array, else primary response
+						if(isNth){
+							this.nthResponse.push(res);
+						} else {
+							this.response = res;
+						}
 						resolve();
 					},
 					err => { 
@@ -41,15 +48,25 @@ export class DataService {
 		return promise;
 	}  	
 
+	/* have to manually manage nthData array */
+	freeNthResponses(){
+		this.nthResponse = [];
+	}
+	
 	/* generic post */
-	postData() {
+	postData(isNth=false) {
 		this.responseStatus = 201;
 		let promise = new Promise((resolve) => {
 			this.http.post(this.getUrl(), this.payload)
 				.toPromise()
 				.then(
 					res => {	
-						this.response = res;
+						// if an nth response item, add to array, else primary response
+						if(isNth){
+							this.nthResponse.push(res);
+						} else {
+							this.response = res;
+						}
 						resolve();
 					},
 					err => { 

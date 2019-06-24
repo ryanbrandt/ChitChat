@@ -8,7 +8,7 @@
         <a class="nav-link tab" (click)="toggleActive(true, $event)" id="group">Groups</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link tab disabled" (click)="toggleActive(true, $event)" id="contact">Contacts</a>
+        <a class="nav-link tab" (click)="toggleActive(true, $event)" id="create">Create Group</a>
       </li>
     </ul>
   </div>
@@ -75,6 +75,33 @@
           <button *ngIf="dataService.response.group" class="btn btn-primary" (click)="getThread($event)" [attr.value]="dataService.response.group_id">View</button>
         </div>
     </ng-template>
+  </div>
+  <!-- Create Group Modal -->
+  <div class="modal" tabindex="-1" role="dialog" id="createModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create New Group</h5>
+          <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" align="center">
+          <p *ngIf="groupExists">
+            A group already exists under that name!
+          </p>
+          <form id="createForm">
+            <div class="form-group">
+              <label for="name">Group Name</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Next</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 <!-- Display if No Messages/Contacts -->
   <ng-template #nothingHere>

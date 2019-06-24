@@ -15,7 +15,6 @@ import * as bootstrap from 'bootstrap';
 export class GroupSettingsComponent implements OnInit {
 	updated = false;
 	Object = Object;
-	sub;
 
 	constructor(private dataService: DataService, private alertService: AlertService, private userService: UserService, private router: Router, private location: Location){ }
 
@@ -52,17 +51,22 @@ export class GroupSettingsComponent implements OnInit {
 	/* remove user from group */
 	async leaveGroup(event){
 		event.preventDefault();
-		this.dataService.setUrl(`http://localhost:8000/user/${ this.userService.getUserId() }/group/${ this.dataService.getUrl().slice(-1) }`);
+		this.dataService.setUrl(`http://localhost:8000/user/${ this.userService.getUserId() }/group/${ this.dataService.getUrl().split('/').pop() }`);
 		await this.dataService.deleteData();
 		this.alertService.success('You have been removed from the group', true);
 		window.history.go(-2);
 	}
 
-	/* add users to group */
-	async addToGroup(event){
+	/* add users to group; opens modal containing search component */
+	addToGroup(event){
 		event.preventDefault();
 		$('#addModal').modal('show');
-		// TODO
+	}
+
+	/* refetch data on modal close */
+	async closeModal(){
+		await this.dataService.getData();
+		$('#addModal').modal('hide');
 	}
 
 	/* return to thread came from */
