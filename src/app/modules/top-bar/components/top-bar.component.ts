@@ -11,7 +11,11 @@ import * as $ from 'jquery';
 
 export class TopBarComponent implements OnInit {
 
-	constructor(private userService: UserService, private router: Router){ }
+	constructor(private userService: UserService, private router: Router){ 
+		this.router.routeReuseStrategy.shouldReuseRoute = function(){
+				return false;
+			};
+	}
 	
 	ngOnInit(){ }
 
@@ -22,6 +26,20 @@ export class TopBarComponent implements OnInit {
 			$(event.target).addClass('active');
 		}
 	};
+
+	/* do search */
+	@HostListener('submit', ['$event'])
+	doSearch(){
+		event.preventDefault();
+		if((<HTMLElement>event.target).id != 'topSearch'){ return; }
+		var form = event.target;
+		localStorage.setItem('searchParam', form['searchQuery'].value);
+		if(this.router.url != '/search'){
+			this.router.navigate(['search']);
+		} else {
+			window.location.reload();
+		}
+	}
 	
 
 

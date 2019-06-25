@@ -32,7 +32,7 @@ export class InboxComponent implements OnInit {
 		if(isInit){
 			this.alertService.clear();
 		    $('.tab').removeClass('active');
-		    $('#' + event.target.id).addClass('active');
+		    $(event.target).addClass('active');
 		}
 	    this.loader.style.display = "block";
 	    if(event){

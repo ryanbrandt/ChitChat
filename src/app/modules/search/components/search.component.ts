@@ -12,7 +12,7 @@ import { UserService } from '../../../global/services/user-service.service';
         		'</form>'+
         		'<div *ngIf="len(dataService.nthResponse) == 1">'+
 	        		'<ul *ngFor="let key of Object.keys(dataService.nthResponse)" class="list-group user-list">'+
-	        			'<li class="list-group-item" *ngIf="dataService.nthResponse[key].username">'+
+	        			'<li class="list-group-item" *ngIf="dataService.nthResponse[key].username && dataService.nthResponse[key].id != userService.getUserId()">'+
 	        				'{{ dataService.nthResponse[key].username }}'+
 	        				'<a href="#" class="add" [attr.id]="dataService.nthResponse[key].id" (click)="addToGroup($event)">Add</a>'+
 	        			'</li>'+
@@ -20,7 +20,7 @@ import { UserService } from '../../../global/services/user-service.service';
 	        	'</div>'+
 	        	'<div *ngIf="len(dataService.nthResponse[0]) > 1">'+
 	        		'<ul *ngFor="let key of Object.keys(dataService.nthResponse[0])" class="list-group user-list">'+
-	        			'<li class="list-group-item" *ngIf="dataService.nthResponse[0][key].username">'+
+	        			'<li class="list-group-item" *ngIf="dataService.nthResponse[0][key].username && dataService.nthResponse[0][key].id != userService.getUserId()">'+
 	        				'{{ dataService.nthResponse[0][key].username }}'+
 	        				'<a href="#" class="add" [attr.id]="dataService.nthResponse[0][key].id" (click)="addToGroup($event)">Add</a>'+
 	        			'</li>'+

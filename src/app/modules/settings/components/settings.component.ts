@@ -41,7 +41,10 @@ export class SettingsComponent implements OnInit {
 	/* enable and disabled update button if fields have changed */
 	@HostListener('change')
 	unlockUpdate(){
-		if((<HTMLInputElement>document.getElementById('username')).value != this.dataService.response['username'].toString() || (<HTMLInputElement>document.getElementById('phone')).value.split('-').join('') != this.dataService.response['phone'].toString()){
+		if((<HTMLInputElement>document.getElementById('username')).value != this.dataService.response['username'].toString() 
+			|| (<HTMLInputElement>document.getElementById('phone')).value.split('-').join('') != this.dataService.response['phone'].toString() 
+			|| ((<HTMLInputElement>document.getElementById('searchable')).checked && !this.dataService.response['is_public'])
+			|| (!(<HTMLInputElement>document.getElementById('searchable')).checked && this.dataService.response['is_public'])){
 			this.updated = true;
 		} else {
 			this.updated = false;
@@ -54,7 +57,7 @@ export class SettingsComponent implements OnInit {
 		event.preventDefault();
 		this.alertService.clear();
 		var form = event.target;
-		this.dataService.payload = {'username': form['username'].value, 'phone': form['phone'].value.split('-').join('')};
+		this.dataService.payload = {'username': form['username'].value, 'phone': form['phone'].value.split('-').join(''), 'is_public': (<HTMLInputElement>document.getElementById('searchable')).checked ? true : false };
 		await this.dataService.patchData();
 		this.alertService.success('Account successfully updated!');
 	}

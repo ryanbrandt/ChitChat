@@ -4,12 +4,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './modules/top-bar/components/top-bar.component';
-import { SearchModule } from './modules/search/search.module';
 import { AlertComponent} from './global/components/alert.component';
 import { UserService } from './global/services/user-service.service';
 import { AuthInterceptor } from './global/services/http.interceptor';
 import { ErrComponent } from './global/components/err.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as bootstrap from 'bootstrap';
 
 @NgModule({
@@ -17,8 +15,6 @@ import * as bootstrap from 'bootstrap';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    SearchModule,
-    BrowserAnimationsModule
   ],
   declarations: [
   	AppComponent,

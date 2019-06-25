@@ -5,3 +5,15 @@
 .user-list {
 	margin-top: 1vh !important;
 }
+
+#loader {
+	display: none;
+}
+
+.search-frame {
+	margin-top: 5vh;
+}
+
+.msg {
+	float: right;
+}

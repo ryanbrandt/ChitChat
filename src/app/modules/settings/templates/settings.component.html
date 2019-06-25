@@ -10,6 +10,11 @@
 			<small class="form-text text-muted">Format: XXX-XXX-XXXX</small>
 		</div>
 		<div class="form-group" align="center">
+          	<input type="checkbox" class="form-check-input" align="center" id="searchable" [checked]="dataService.response['is_public'] == true">
+          	<label for="searchable" class="form-check-label">Public Account</label>
+          	<small class="form-text text-muted">Public accounts can be searched for by username/phone</small>
+        </div>
+		<div class="form-group" align="center">
           	<button type="submit" class="btn btn-primary" align="center" [disabled]="!updated">Update</button>
         </div>	
 	</form>
