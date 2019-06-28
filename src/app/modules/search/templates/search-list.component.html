@@ -8,7 +8,7 @@
     <!-- iterate about multiple objects returned -->
     <div *ngIf="!dataService.response.username; else oneResult">
 	    <ul class="list-group" *ngFor="let key of Object.keys(dataService.response)">
-  			<li class="list-group-item">{{ dataService.response[key].username }} <strong *ngIf="userService.getUserId() == dataService.response[key].id">(You)</strong>
+  			<li class="list-group-item cust">{{ dataService.response[key].username }} <strong *ngIf="userService.getUserId() == dataService.response[key].id">(You)</strong>
   				<a class="msg" href="#" [attr.id]="dataService.response[key].id" (click)="messageUser($event)">Message</a>
   			</li>
 	    </ul>

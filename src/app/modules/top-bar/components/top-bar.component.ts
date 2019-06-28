@@ -1,7 +1,10 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { timer } from 'rxjs';
 import { Router, NavigationStart } from  '@angular/router';
 import { UserService } from '../../../global/services/user-service.service';
-import * as $ from 'jquery';
+import { DataService } from '../../../global/services/data-service.service';
+
+import * as $AB from 'jquery';
 
 @Component({
   selector: 'app-top-bar',
@@ -10,13 +13,74 @@ import * as $ from 'jquery';
 })
 
 export class TopBarComponent implements OnInit {
+	private pollSub;
+	Object = Object;
+	ua = navigator.userAgent;
+	numUnread = 0;
 
-	constructor(private userService: UserService, private router: Router){ 
+	constructor(private userService: UserService, private dataService: DataService, private router: Router){ 
 		this.router.routeReuseStrategy.shouldReuseRoute = function(){
 				return false;
 			};
+		this.pollSub = timer(0, 30000).subscribe(x => {
+			this.fetchNotif();
+		})
 	}
-	
+
+	/* polls for new notifications and retrieves */
+	async fetchNotif(){
+		await this.dataService.getData(false, 'http://localhost:8000/poll/notification/', true, false);
+		if(this.dataService.notifStatus['status'] == true){
+			await this.dataService.getData(false, `http://localhost:8000/notification/${ this.userService.getUserId() }`, false, true);
+			this.getNumUnread();
+		}
+	}
+
+	/* gets number of unread notifications for sup tag */
+	getNumUnread(){
+		if(typeof(this.dataService.notifDat['read']) != 'undefined' && this.dataService.notifDat['read'] == 0){
+			this.numUnread = 1;
+		} else {
+			var count = 0;
+			for(let key of Object.keys(this.dataService.notifDat)){
+				if(this.dataService.notifDat[key]['read'] == 0){
+					count++;
+				}
+			}
+			this.numUnread = count;
+		}
+	}
+
+	/* open notification modal, set all notifications read */
+	async openNotif(event){
+		event.preventDefault();
+		$('#notifModal').modal('show');
+		await this.dataService.patchData(`http://localhost:8000/notification/${ this.userService.getUserId() }`, true);
+		this.numUnread = 0;
+	}
+
+	/* clears notification modal by deletion */
+	async clearNotif(){
+		$('#notifModal').modal('hide');
+		await this.dataService.deleteData(`http://localhost:8000/notification/${ this.userService.getUserId() }`);
+		this.numUnread = 0;
+		this.dataService.notifDat = {};
+	}
+
+	/* handles redirecting user to notification source */
+	goThere(event, isUm){
+		event.preventDefault();
+		this.dataService.setUrl(isUm ? `http://localhost:8000/message/user/${ this.userService.getUserId() }/user/${ event.target.id }` :
+						 `http://localhost:8000/message/group/${ event.target.id }`);
+		// quick fix, but ugly
+		if(this.router.url != '/thread'){
+			this.router.navigate(['thread']);
+			$('#notifModal').modal('hide');
+		} else {
+			window.location.reload();
+		}
+	}
+
 	ngOnInit(){ }
 
 	/* Nav active class management */
@@ -40,7 +104,9 @@ export class TopBarComponent implements OnInit {
 			window.location.reload();
 		}
 	}
-	
 
+	ngOnDestroy(){
+		this.pollSub.unsubscribe();
+	}
 
 }

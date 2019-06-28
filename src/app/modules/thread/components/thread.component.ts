@@ -15,8 +15,7 @@ export class ThreadComponent implements OnInit {
 	Object = Object;
 	private navSub;
 	private pollSub;
-	private otherId;
-	private last;
+	private otherId;                
 
 	constructor(private dataService: DataService, private alertService: AlertService, private userService: UserService, private router: Router){
 			this.navSub = this.router.events.subscribe((event) => {
@@ -52,7 +51,6 @@ export class ThreadComponent implements OnInit {
 			this.dataService.setUrl(localStorage.getItem('urlTmp'));
 		}
 		await this.dataService.getData();
-		this.last = Object.keys(this.dataService.response).length - 1;
 		document.getElementById('loader').style.display = 'none';
 
 		// init long polling

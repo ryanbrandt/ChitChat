@@ -6,7 +6,23 @@
  	color: #fd5e5e !important;
  }
 
- .fa-bell {
- 	color: white;
- 	padding-right: 15px;
+ sup {
+ 	color: #fd5e5e;
+ }
+
+ .cust {
+ 	margin-top: 1vh;
+ }
+
+ .details {
+ 	float: left;
+ }
+
+ .timestamp {
+ 	font-style: italic;
+ 	float: left;
+ }
+
+ .notif-link {
+ 	float: right;
  }

@@ -26,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
         this.dataService.responseStatus = error.status;
         if(error.status == 0 || error.status == 500){
           this.router.navigate(['err']);
-        } else if(error.status == 403 || error.status == 401){
+        } else if((error.status == 403 || error.status == 401) && (this.router.url != '/' && this.router.url != '/register')){
           this.alertService.unauthorized('You do not have permission to perform this action');
         } else if(error.status == 400) {
           if(this.router.url == '/' || this.router.url == '/register'){

@@ -8,13 +8,14 @@ import { AlertComponent} from './global/components/alert.component';
 import { UserService } from './global/services/user-service.service';
 import { AuthInterceptor } from './global/services/http.interceptor';
 import { ErrComponent } from './global/components/err.component';
+
 import * as bootstrap from 'bootstrap';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   declarations: [
   	AppComponent,

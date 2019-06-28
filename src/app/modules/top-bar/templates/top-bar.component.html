@@ -11,14 +11,17 @@
                 <a class="nav-link bar" href="#" routerLink="/inbox" id="message">Message Center</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link bar notif" (click)="openNotif($event)" href="#">Notifications
+                    <sup>{{ numUnread > 0 ? numUnread: '' }}</sup>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link bar" href="#" routerLink="/settings">Settings</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link bar danger" href="#" (click)="userService.logout()">Logout</a>
             </li>
         </ul>
-        <!-- Notification icon: TODO: link sup to websocket -->
-        <i class="far fa-bell fa-lg"></i>
         <!-- Search Element -->
         <form class="form-inline" id="topSearch">
             <input class="form-control mr-sm-2" type="search" placeholder="Search Username/Phone" aria-label="Search" id="searchQuery" required>
@@ -26,3 +29,47 @@
         </form>
     </div>
 </nav>
+<!-- Notifications Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="notifModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Notifications</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" align="center">
+            <!-- iterate about notification objects if many -->
+            <div *ngIf="!dataService.notifDat.source_id; else oneResult">
+                <ul class="list-group" *ngFor="let key of Object.keys(dataService.notifDat)">
+                    <li [className]="dataService.notifDat[key].activity_type == 'UM' || dataService.notifDat[key].activity_type == 'GM' ? 'list-group-item list-group-item-primary cust' : 'list-group-item list-group-item-info cust'">
+                        <strong *ngIf="dataService.notifDat[key].read == 0"><span class="badge badge-secondary">New</span></strong>
+                        <p>
+                            <strong class="details">{{ dataService.notifDat[key].details }}</strong><br/>
+                            <small class="timestamp">{{ dataService.notifDat[key].timestamp | date: 'hh:mm a yyy-MM-dd' }}</small>
+                        </p>
+                        <a href="#" [attr.id]="dataService.notifDat[key].source_id" (click)="goThere($event, dataService.notifDat[key].activity_type == 'UM' ? true : false)" class="notif-link">Go There</a>
+                    </li>
+                </ul>
+            </div>
+        <!-- else if only one object returned -->
+        <ng-template #oneResult>
+            <ul class="list-group">
+                <li [className]="dataService.notifDat.activity_type == 'UM' || dataService.notifDat.activity_type == 'GM' ? 'list-group-item list-group-item-primary cust' : 'list-group-item list-group-item-info cust'">
+                    <strong *ngIf="dataService.notifDat.read == 0"><span class="badge badge-secondary">New</span></strong>
+                    <p>
+                        <strong class="details">{{ dataService.notifDat.details }}</strong><br/>
+                        <small class="timestamp">{{ dataService.notifDat.timestamp | date: 'hh:mm a yyy-MM-dd' }}</small>
+                    </p>
+                    <a href="#" [attr.id]="dataService.notifDat.source_id" (click)="goThere($event, dataService.notifDat.activity_type == 'UM' ? true : false)"class="notif-link">Go There</a>
+                </li>
+            </ul>
+        </ng-template>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-danger" (click)="clearNotif()">Clear All</button>
+        </div>
+      </div>
+    </div>
+</div>

@@ -11,6 +11,9 @@ export class DataService {
 	response = {};
 	// array of objects, holds nth responses if a page needs data from plural endpoints
 	nthResponse = [];
+	// reserved for notification data, since global polling
+	notifStatus = {};
+	notifDat = {}
 
   	constructor(private http: HttpClient) { }
 
@@ -24,16 +27,22 @@ export class DataService {
   	}
 
   	/* generic get */
-	getData(isNth=false) {
+	getData(isNth=false, url=null, isNotifPoll=false, isNotif=false) {
 		this.responseStatus = 200;
 		let promise = new Promise((resolve) => {
-			this.http.get(this.getUrl())
+			this.http.get(url? url : this.getUrl())
 				.toPromise()
 				.then(
 					res => {
-						// if an nth response item, add to array, else primary response
+						// if an nth response item, add to array
 						if(isNth){
 							this.nthResponse.push(res);
+						// if a notifPoll/notifDat, add to notif data
+						} else if(isNotifPoll){
+							this.notifStatus = res;
+						} else if(isNotif){
+							this.notifDat = res;
+						// else if page primary data
 						} else {
 							this.response = res;
 						}
@@ -97,14 +106,16 @@ export class DataService {
 	}
 
 	/* generic patch */
-	patchData() {
+	patchData(url=null, ignoreRes=false) {
 		this.responseStatus = 200;
 		let promise = new Promise((resolve) => {
-			this.http.patch(this.getUrl(), this.payload)
+			this.http.patch(url ? url : this.getUrl(), this.payload)
 				.toPromise()
 				.then(
 					res => {
-						this.response = res;
+						if(!ignoreRes){
+							this.response = res;
+						}
 						resolve();
 					},
 					err => {
@@ -116,10 +127,10 @@ export class DataService {
 	}
 
 	/* generic delete; always need to call a detail endpoint */
-	deleteData() {
+	deleteData(url=null) {
 		this.responseStatus = 204;
 		let promise = new Promise((resolve) => {
-			this.http.delete(this.getUrl())
+			this.http.delete(url ? url : this.getUrl())
 				.toPromise()
 				.then(
 					res => {
