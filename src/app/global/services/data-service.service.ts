@@ -54,7 +54,7 @@ export class DataService {
 	}
 	
 	/* generic post */
-	postData(isNth=false) {
+	postData(isNth=false, ignoreRes=false) {
 		this.responseStatus = 201;
 		let promise = new Promise((resolve) => {
 			this.http.post(this.getUrl(), this.payload)
@@ -62,9 +62,9 @@ export class DataService {
 				.then(
 					res => {	
 						// if an nth response item, add to array, else primary response
-						if(isNth){
+						if(isNth && !ignoreRes){
 							this.nthResponse.push(res);
-						} else {
+						} else if(!ignoreRes){
 							this.response = res;
 						}
 						resolve();

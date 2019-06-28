@@ -54,7 +54,7 @@
     <ng-template #oneThread>
       <div class="card-body">
           <!-- UserMessage header: show user -->
-          <h5 *ngIf="dataService.response.user" class="card-title">
+          <h5 *ngIf="dataService.response.recipient_id" class="card-title">
             {{ dataService.response.message.author_id == userService.getUserId() ? dataService.response.recipient : dataService.response.message.author }}
           </h5>
           <!-- GroupMessage header: show group -->
@@ -70,9 +70,9 @@
               <small>{{ dataService.response.message.timestamp | date: 'hh:mm a yyy-MM-dd' }}</small>
           </p>
           <!-- Value = PK of User messaging with in this thread -->
-          <button *ngIf="dataService.response.user" class="btn btn-primary" (click)="getThread($event)" [attr.value]="dataService.response.message.author_id == userService.getUserId() ? dataService.response.recipient_id : dataService.response.message.author_id">View</button>
+          <button *ngIf="dataService.response.recipient_id" class="btn btn-primary" (click)="getThread($event)" [attr.value]="dataService.response.message.author_id == userService.getUserId() ? dataService.response.recipient_id : dataService.response.message.author_id">View</button>
           <!-- GroupMessage Value = PK of Group -->
-          <button *ngIf="dataService.response.group" class="btn btn-primary" (click)="getThread($event)" [attr.value]="dataService.response.group_id">View</button>
+          <button *ngIf="dataService.response.group_id" class="btn btn-primary" (click)="getThread($event)" [attr.value]="dataService.response.group_id">View</button>
         </div>
     </ng-template>
   </div>
