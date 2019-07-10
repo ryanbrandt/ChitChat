@@ -3,6 +3,7 @@ import { LoginRoutingModule } from './login-module.routing';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login.component';
 import { RegisterComponent } from './components/register.component';
+import { ContactModule } from '../contact/contact.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { RegisterComponent } from './components/register.component';
   ],
   imports: [
     CommonModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    ContactModule
   ]
 })
 export class LoginModule { }

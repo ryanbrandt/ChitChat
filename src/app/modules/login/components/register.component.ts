@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../../../global/services/data-service.service';
 import { AlertService } from '../../../global/services/alert-service.service';
 import { UserService } from '../../../global/services/user-service.service';
-import * as $ from 'jquery';
+import * as $AB from 'jquery';
 
 @Component({
   templateUrl: '../templates/register.component.html',
@@ -39,6 +39,11 @@ export class RegisterComponent implements OnInit {
 		$('#registerForm').slideDown('slow', function(){ });
 	}
 	
+	/* open contact component */
+	contactUs(event){
+		event.preventDefault();
+		$('#contactModal').modal('show');
+	}
 
 
 }

@@ -22,6 +22,9 @@
 		<div align="center" id="registerDetail">
 		    <a href="#" routerLink=""><small>Already a member? Login now!</small></a>
 		</div>
+		<div align="center" id="registerDetail">
+		    <a href="#" (click)="contactUs($event)"><small>Need help?</small></a>
+		</div>
 		<div class="text-center" id="loader">
         	<div class="spinner-border text-dark" role="status">
           		<span class="sr-only">Loading...</span>
@@ -29,3 +32,4 @@
       </div>
 	</section>
 </section>
+<app-contact></app-contact>

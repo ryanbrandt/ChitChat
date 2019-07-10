@@ -8,6 +8,8 @@ import { AlertComponent} from './global/components/alert.component';
 import { UserService } from './global/services/user-service.service';
 import { AuthInterceptor } from './global/services/http.interceptor';
 import { ErrComponent } from './global/components/err.component';
+import { ContactModule } from './modules/contact/contact.module';
+
 
 import * as bootstrap from 'bootstrap';
 
@@ -15,13 +17,14 @@ import * as bootstrap from 'bootstrap';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ContactModule
   ],
   declarations: [
   	AppComponent,
   	TopBarComponent,  
     AlertComponent,
-    ErrComponent
+    ErrComponent,
   ],
   providers: [
     UserService,

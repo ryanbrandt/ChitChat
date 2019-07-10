@@ -4,7 +4,7 @@ import { DataService } from '../../../global/services/data-service.service';
 import { AlertService } from '../../../global/services/alert-service.service';
 import { UserService } from '../../../global/services/user-service.service';
 import { User } from '../../../global/models/user-models';
-import * as $ from 'jquery';
+import * as $AB from 'jquery';
 
 @Component({
   templateUrl: '../templates/login.component.html',
@@ -36,6 +36,12 @@ export class LoginComponent implements OnInit{
 	ngOnInit(){
 		if(this.userService.getUserId()){ this.router.navigate(['inbox']); }
 		$('#loginForm').slideDown("slow", function(){ });
+	}
+
+	/* open contact component */
+	contactUs(event){
+		event.preventDefault();
+		$('#contactModal').modal('show');
 	}
 	
 

@@ -9,7 +9,12 @@ import { Location } from '@angular/common';
 export class ErrComponent { 
 
 	constructor(private location: Location){ }
-	// TODO: contact
+	
+	// open contact component
+	contactUs(event){
+		event.preventDefault();
+		$('#contactModal').modal('show');
+	}
 
 	goBack(){
 		this.location.back();

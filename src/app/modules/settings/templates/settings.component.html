@@ -1,5 +1,5 @@
 <section class="maintenance-frame">
-	<form>
+	<form id="updateForm">
 		<div class="form-group">
 			<label for="username">Username</label>
 			<input type="text" class="form-control" id="username" [attr.value]="dataService.response['username']" required>
@@ -24,6 +24,9 @@
     <div align="center" class="maintenace-detail">
         <a href="#" (click)="confirmDeletion($event)"><small>Delete Your Account</small></a>
     </div>
+    <div align="center" class="maintenace-detail">
+        <a href="#" (click)="contactUs($event)"><small>Contact Us</small></a>
+    </div>
     <!-- Deletion Confirmation Modal -->
 	<div class="modal" tabindex="-1" role="dialog" id="confirmModal">
 	  <div class="modal-dialog" role="document">
@@ -42,3 +45,5 @@
 	  </div>
 	</div>
 </section>
+<!-- Contact Component -->
+<app-contact></app-contact>
