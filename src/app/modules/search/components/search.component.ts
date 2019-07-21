@@ -44,12 +44,10 @@ export class SearchComponent {
 	@HostListener('input', ['$event'])
 	async doSearch(){
 		if((<HTMLElement>event.target).id != 'search') { return; }
-		console.log((<HTMLInputElement>event.target).value);
 		this.dataService.freeNthResponses();
 		var tmpUrl = this.dataService.getUrl();
 		this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/user/search/${ (<HTMLInputElement>event.target).value }`);
 		await this.dataService.getData(true);
-		console.log(this.len(this.dataService.nthResponse));
 		this.dataService.setUrl(tmpUrl);
 	}
 
