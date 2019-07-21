@@ -15,7 +15,7 @@ export class SettingsComponent implements OnInit {
 	updated = false;
 
 	constructor(private dataService: DataService, private alertService: AlertService, private userService: UserService, private router: Router){
-		this.dataService.setUrl(`http://localhost:8000/user/${ this.userService.getUserId() }`);
+		this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/user/${ this.userService.getUserId() }`);
 	}
 
 	async ngOnInit(){

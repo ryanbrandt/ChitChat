@@ -24,7 +24,7 @@ export class SearchListComponent {
 	/* perform lookup against query param */
 	async doSearch(){
 		document.getElementById('loader').style.display = 'block';
-		this.dataService.setUrl(`http://localhost:8000/user/search/${ localStorage.getItem('searchParam') }`);
+		this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/user/search/${ localStorage.getItem('searchParam') }`);
 		await this.dataService.getData();
 		console.log(this.dataService.response);
 		document.getElementById('loader').style.display = 'none';
@@ -33,7 +33,7 @@ export class SearchListComponent {
 	/* redirect user to thread with user selected */
 	messageUser(event){
 		event.preventDefault();
-		this.dataService.setUrl(`http://localhost:8000/message/user/${ this.userService.getUserId() }/user/${ event.target.id }`);
+		this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/message/user/${ this.userService.getUserId() }/user/${ event.target.id }`);
 		this.router.navigate(['thread']);
 	}
 

@@ -47,7 +47,7 @@ export class SearchComponent {
 		console.log((<HTMLInputElement>event.target).value);
 		this.dataService.freeNthResponses();
 		var tmpUrl = this.dataService.getUrl();
-		this.dataService.setUrl(`http://localhost:8000/user/search/${ (<HTMLInputElement>event.target).value }`);
+		this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/user/search/${ (<HTMLInputElement>event.target).value }`);
 		await this.dataService.getData(true);
 		console.log(this.len(this.dataService.nthResponse));
 		this.dataService.setUrl(tmpUrl);
@@ -57,7 +57,7 @@ export class SearchComponent {
 	async addToGroup(event){
 		event.preventDefault();
 		var tmpUrl = this.dataService.getUrl();
-		this.dataService.setUrl('http://localhost:8000/user/group/');
+		this.dataService.setUrl('https://chit-chat-web-services.herokuapp.com/user/group/');
 		this.dataService.payload = {'user': event.target.id, 'group': localStorage.getItem('urlTmp').split('/').pop() };
 		await this.dataService.postData(true);
 		if(this.dataService.responseStatus == 201){

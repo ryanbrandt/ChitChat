@@ -69,8 +69,8 @@ export class ThreadComponent implements OnInit {
 	async longPoll(){
 		// build pollUrl, varies if group/user thread
 		var maxId = this.getMaxId();
-		var pollUrl = this.dataService.getUrl().includes('user') ? `http://localhost:8000/poll/user/${ this.otherId }/${ this.userService.getUserId() }/${ maxId }` :
-																	`http://localhost:8000/poll/group/${ this.otherId }/${ maxId }`;
+		var pollUrl = this.dataService.getUrl().includes('user') ? `https://chit-chat-web-services.herokuapp.com/poll/user/${ this.otherId }/${ this.userService.getUserId() }/${ maxId }` :
+																	`https://chit-chat-web-services.herokuapp.com/poll/group/${ this.otherId }/${ maxId }`;
 		this.dataService.setUrl(pollUrl);
 		// poll, if returns status of true, new data to be fetched
 		await this.dataService.getData(true);
@@ -98,7 +98,7 @@ export class ThreadComponent implements OnInit {
  		// varies if group/user thread
  		this.dataService.payload = localStorage.getItem('urlTmp').includes('user') ? {'recipient_id': this.otherId} : {'group_id': this.otherId}
  		this.dataService.payload['message'] = {'author_id': this.userService.getUserId(), 'content': form['message'].value };
- 		var sendUrl = localStorage.getItem('urlTmp').includes('user') ? 'http://localhost:8000/message/user/' : 'http://localhost:8000/message/group/';
+ 		var sendUrl = localStorage.getItem('urlTmp').includes('user') ? 'https://chit-chat-web-services.herokuapp.com/message/user/' : 'https://chit-chat-web-services.herokuapp.com/message/group/';
  		this.dataService.setUrl(sendUrl);
  		await this.dataService.postData(false, true);
  		this.getMessages();
@@ -108,7 +108,7 @@ export class ThreadComponent implements OnInit {
  	/* redirect to group management */
  	manageGroup(event){
  		event.preventDefault();
- 		this.dataService.setUrl(`http://localhost:8000/group/${ localStorage.getItem('urlTmp').split('/').pop() }`);
+ 		this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/group/${ localStorage.getItem('urlTmp').split('/').pop() }`);
  		this.router.navigate(['settings/manage-group']);
  	}
 

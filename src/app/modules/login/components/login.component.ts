@@ -14,7 +14,7 @@ import * as $AB from 'jquery';
 export class LoginComponent implements OnInit{
 	
 	constructor(private dataService: DataService, private alertService: AlertService, private router: Router, private userService: UserService){ 
-		this.dataService.setUrl('http://localhost:8000/api-token-auth/');
+		this.dataService.setUrl('https://chit-chat-web-services.herokuapp.com/api-token-auth/');
 	}
 
 	/* validate user on submit */

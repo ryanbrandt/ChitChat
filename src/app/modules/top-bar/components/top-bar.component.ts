@@ -29,9 +29,9 @@ export class TopBarComponent implements OnInit {
 
 	/* polls for new notifications and retrieves */
 	async fetchNotif(){
-		await this.dataService.getData(false, 'http://localhost:8000/poll/notification/', true, false);
+		await this.dataService.getData(false, 'https://chit-chat-web-services.herokuapp.com/poll/notification/', true, false);
 		if(this.dataService.notifStatus['status'] == true){
-			await this.dataService.getData(false, `http://localhost:8000/notification/${ this.userService.getUserId() }`, false, true);
+			await this.dataService.getData(false, `https://chit-chat-web-services.herokuapp.com/notification/${ this.userService.getUserId() }`, false, true);
 			this.getNumUnread();
 		}
 	}
@@ -55,14 +55,14 @@ export class TopBarComponent implements OnInit {
 	async openNotif(event){
 		event.preventDefault();
 		$('#notifModal').modal('show');
-		await this.dataService.patchData(`http://localhost:8000/notification/${ this.userService.getUserId() }`, true);
+		await this.dataService.patchData(`https://chit-chat-web-services.herokuapp.com/notification/${ this.userService.getUserId() }`, true);
 		this.numUnread = 0;
 	}
 
 	/* clears notification modal by deletion */
 	async clearNotif(){
 		$('#notifModal').modal('hide');
-		await this.dataService.deleteData(`http://localhost:8000/notification/${ this.userService.getUserId() }`);
+		await this.dataService.deleteData(`https://chit-chat-web-services.herokuapp.com/notification/${ this.userService.getUserId() }`);
 		this.numUnread = 0;
 		this.dataService.notifDat = {};
 	}
@@ -70,8 +70,8 @@ export class TopBarComponent implements OnInit {
 	/* handles redirecting user to notification source */
 	goThere(event, isUm){
 		event.preventDefault();
-		this.dataService.setUrl(isUm ? `http://localhost:8000/message/user/${ this.userService.getUserId() }/user/${ event.target.id }` :
-						 `http://localhost:8000/message/group/${ event.target.id }`);
+		this.dataService.setUrl(isUm ? `https://chit-chat-web-services.herokuapp.com/message/user/${ this.userService.getUserId() }/user/${ event.target.id }` :
+						 `https://chit-chat-web-services.herokuapp.com/message/group/${ event.target.id }`);
 		// quick fix, but ugly
 		if(this.router.url != '/thread'){
 			this.router.navigate(['thread']);

@@ -51,7 +51,7 @@ export class GroupSettingsComponent implements OnInit {
 	/* remove user from group */
 	async leaveGroup(event){
 		event.preventDefault();
-		this.dataService.setUrl(`http://localhost:8000/user/${ this.userService.getUserId() }/group/${ this.dataService.getUrl().split('/').pop() }`);
+		this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/user/${ this.userService.getUserId() }/group/${ this.dataService.getUrl().split('/').pop() }`);
 		await this.dataService.deleteData();
 		this.alertService.success('You have been removed from the group', true);
 		window.history.go(-2);

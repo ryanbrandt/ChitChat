@@ -13,7 +13,7 @@ import * as $AB from 'jquery';
 export class RegisterComponent implements OnInit {
 
 	constructor(private dataService: DataService, private alertService: AlertService, private router: Router, private userService: UserService ){
-		this.dataService.setUrl('http://localhost:8000/user/');
+		this.dataService.setUrl('https://chit-chat-web-services.herokuapp.com/user/');
 	}
 
 	/* register user on submit */

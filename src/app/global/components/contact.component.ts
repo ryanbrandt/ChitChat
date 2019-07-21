@@ -51,7 +51,7 @@ export class ContactComponent {
 		this.dataService.payload = {"user": this.userService.getUsername(), "subject": form['helpCategory'].value, "contents": form['helpContent']}
 		// preserve original url
 		var tmpUrl = this.dataService.getUrl();
-		this.dataService.setUrl('http://localhost:8000/help/');
+		this.dataService.setUrl('https://chit-chat-web-services.herokuapp.com/help/');
 		await this.dataService.postData(true);
 		this.dataService.setUrl(tmpUrl);
 		$('#contactModal').modal('hide');

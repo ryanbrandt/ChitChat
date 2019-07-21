@@ -25,7 +25,7 @@ export class InboxComponent implements OnInit {
  	}
 
 	constructor(private dataService: DataService, private alertService: AlertService, private userService: UserService, private router: Router){ 
-		this.dataService.setUrl(`http://localhost:8000/inbox/${ this.userService.getUserId() }`);
+		this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/inbox/${ this.userService.getUserId() }`);
 	}
 
 	async toggleActive(isInit = true, event=null) {  
@@ -39,11 +39,11 @@ export class InboxComponent implements OnInit {
 	    	switch(event.target.id){
 	    		case 'user':
 	    			this.curTab = 'user';
-	    			this.dataService.setUrl(`http://localhost:8000/inbox/${ this.userService.getUserId() }`);
+	    			this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/inbox/${ this.userService.getUserId() }`);
 	    			break;
 	    		case 'group':
 	    			this.curTab = 'group';
-	    			this.dataService.setUrl(`http://localhost:8000/inbox/group/${ this.userService.getUserId() }`);
+	    			this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/inbox/group/${ this.userService.getUserId() }`);
 	    			break;
 	    		case 'create':
 	    			$('#createModal').modal('show');
@@ -58,10 +58,10 @@ export class InboxComponent implements OnInit {
  		// set url parameters to fetch thread, goto thread
  		switch(this.curTab){
  			case 'user':
- 				this.dataService.setUrl(`http://localhost:8000/message/user/${ this.userService.getUserId() }/user/${ event.target.value }`);
+ 				this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/message/user/${ this.userService.getUserId() }/user/${ event.target.value }`);
  				break;
  			case 'group':
- 				this.dataService.setUrl(`http://localhost:8000/message/group/${ event.target.value }`);
+ 				this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/message/group/${ event.target.value }`);
  		}
  		
  		this.router.navigate(['thread']);
@@ -75,7 +75,7 @@ export class InboxComponent implements OnInit {
  		var form = event.target;
  		// create group
  		this.dataService.payload = {'name': form['name'].value}
- 		this.dataService.setUrl('http://localhost:8000/group/');
+ 		this.dataService.setUrl('https://chit-chat-web-services.herokuapp.com/group/');
  		await this.dataService.postData();
  		// make sure successful
  		if(this.dataService.responseStatus != 201){
@@ -83,18 +83,18 @@ export class InboxComponent implements OnInit {
  			form['name'].value = '';
  		} else {
  			// add creator to group
- 			this.dataService.setUrl('http://localhost:8000/user/group/');
+ 			this.dataService.setUrl('https://chit-chat-web-services.herokuapp.com/user/group/');
  			this.dataService.payload = {'user': this.userService.getUserId(), 'group': this.dataService.response['id']};
  			await this.dataService.postData();
  			// post first message on creators behalf
- 			this.dataService.setUrl('http://localhost:8000/message/group/');
+ 			this.dataService.setUrl('https://chit-chat-web-services.herokuapp.com/message/group/');
  			this.dataService.payload = {'group_id': this.dataService.response['group'], 'message': 
  				{'author_id': this.userService.getUserId(), 'content': `Welcome to ${this.dataService.response['group_name']}!`}
  			};
  			await this.dataService.postData();
  			// hide modal, redirect to newly created thread
  			$('#createModal').modal('hide');
- 			this.dataService.setUrl(`http://localhost:8000/message/group/${ this.dataService.response['group_id'] }`);
+ 			this.dataService.setUrl(`https://chit-chat-web-services.herokuapp.com/message/group/${ this.dataService.response['group_id'] }`);
  			this.alertService.success(`${ this.dataService.response['group'] } successfully created! Add members by clicking on the settings cog`, true);
  			this.router.navigate(['thread']);
  		}
